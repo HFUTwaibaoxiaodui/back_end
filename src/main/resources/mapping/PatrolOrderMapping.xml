@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是用于绑定Dao接口的，即面向接口编程-->
+<mapper namespace="edu.hfut.back_end.Mapper.PatrolOrderMapper">
+
+    <resultMap id="PatrolOrderResultMap" type="edu.hfut.back_end.Entity.PatrolOrder">
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="creator_id" jdbcType="BIGINT" property="creatorId" />
+        <result column="order_title" jdbcType="VARCHAR" property="orderTitle" />
+        <result column="order_description" jdbcType="VARCHAR" property="orderDescription" />
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+        <result column="order_address" jdbcType="VARCHAR" property="orderAddress" />
+        <result column="plan_start_time" jdbcType="DATE" property="planStartTime" />
+        <result column="plan_end_time" jdbcType="DATE" property="planEndTime" />
+        <result column="score" jdbcType="INTEGER" property="score" />
+        <result column="gmt_create" jdbcType="DATE" property="gmtCreate" />
+        <result column="gmt_modified" jdbcType="DATE" property="gntModified" />
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="PatrolOrderResultMap" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
+        select order_id, creator_id, order_title, order_description, order_number, order_address, plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        from patrol_order
+    </select>
+
+    <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id" useGeneratedKeys="true">
+        insert into patrol_order(order_id, creator_id, order_title, order_description, order_number, order_address, plan_start_time, plan_end_time, score, gmt_create, gmt_modified)
+        values(#{orderId}, #{creatorId}, #{orderTitle}, #{orderDescription}, #{orderNumber}, #{orderAddress}, #{planStartTime}, #{planEndTime}, #{score}, #{gmtCreate}, #{gntModified})
+    </insert>
+    
+</mapper>
