@@ -7,4 +7,6 @@
         (#{accountName},#{accountType,#{imagePath},#{password},#{realName},#{phone},#{address},#{area},#{currentTime},
          #{accountState},#{currentTime},#{currentTime})
     </insert>
+
+
 </mapper>

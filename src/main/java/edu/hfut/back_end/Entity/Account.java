@@ -15,4 +15,8 @@ public class Account {
     String area;
     Date currentTime;
     String accountState;
+
+    public void setCurrentTime(Date currentTime){
+        this.currentTime=currentTime;
+    }
 }
