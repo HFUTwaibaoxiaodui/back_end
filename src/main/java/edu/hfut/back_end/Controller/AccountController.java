@@ -26,9 +26,14 @@ public class AccountController {
     @ResponseBody
     String login(String username,String password) throws JsonProcessingException {
         HashMap<String,Object> hs=new HashMap<>();
-        hs.put("token",username+","+password);
-        ObjectMapper objectMapper=new ObjectMapper();
-        return objectMapper.writeValueAsString(hs);
+        if(accountService.judgeLoad(username,password)){
+            hs.put("token",username+","+password);
+            ObjectMapper objectMapper=new ObjectMapper();
+            return objectMapper.writeValueAsString(hs);
+        }
+        else{
+            return "false";
+        }
     }
 
     @RequestMapping(value="/usersignin",method =RequestMethod.GET)

@@ -11,6 +11,16 @@ public class AccountService {
     @Resource
     AccountMapper accountMapper;
 
+    public boolean judgeLoad(String username,String password){
+        String searchPassword=accountMapper.searchPassword(username);
+        if(searchPassword==null||searchPassword!=password){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public void signIn(Account account){
         accountMapper.signIn(account);
     }
