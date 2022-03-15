@@ -9,8 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface PatrolOrderMapper {
-    public List<PatrolOrder> selectAll();
-    public void insert(PatrolOrder patrolOrder);
-    public void update(PatrolOrder patrolOrder);
-    public void delete(@Param("orderId") BigInteger orderId);
+
+    List<PatrolOrder> selectAll();
+    void insert(PatrolOrder patrolOrder);
+    void update(PatrolOrder patrolOrder);
+    void delete(@Param("orderId") BigInteger orderId);
+
 }

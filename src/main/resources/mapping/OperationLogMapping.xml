@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是用于绑定Dao接口的，即面向接口编程-->
+<mapper namespace="edu.hfut.back_end.Mapper.OperationLogMapper">
+
+    <resultMap id="OperationLogResultMap" type="edu.hfut.back_end.Entity.OperationLog">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="operator_id" jdbcType="BIGINT" property="operatorId" />
+        <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="operation_time" jdbcType="DATE" property="operationTime" />
+    </resultMap>
+
+    <insert id="insert" parameterType="edu.hfut.back_end.Entity.OperationLog" keyColumn="id" useGeneratedKeys="true">
+        insert into operation_log(id, operator_id, operation_name, description, operation_time)
+        values(#{id}, #{operatorId}, #{operationName}, #{description}, #{operationTime})
+    </insert>
+
+</mapper>

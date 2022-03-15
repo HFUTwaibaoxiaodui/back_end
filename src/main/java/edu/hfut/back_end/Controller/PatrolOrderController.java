@@ -33,7 +33,7 @@ public class PatrolOrderController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增", notes = "新增")
     public void insert(PatrolOrder patrolOrder) {
-        log.info("开始新增工单...{}", patrolOrder);
+        log.info("开始新增...{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
         patrolOrder.setGmtModified(date);
@@ -59,4 +59,5 @@ public class PatrolOrderController {
         log.info("开始删除...orderId={}", orderId);
         patrolOrderService.delete(orderId);
     }
+
 }
