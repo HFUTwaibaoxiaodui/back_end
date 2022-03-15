@@ -63,4 +63,10 @@ public class AccountController {
             return "注册成功";
         }
     }
+
+    @RequestMapping(value = "/updateinformation",method = RequestMethod.PUT)
+    void updateInformation(@RequestBody Account account){
+        account.setCurrentTime(new Date());
+        accountService.updateInformation(account);
+    }
 }

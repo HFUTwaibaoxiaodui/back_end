@@ -15,4 +15,6 @@ public interface AccountMapper {
     String selectAccountType(String accountName);
     boolean phoneIsExist(String phone);
     boolean accountNameIsExist(String accountName);
+    List<Account> selectAllInformation();
+    void updateInformation(Account account);
 }
