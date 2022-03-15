@@ -28,6 +28,7 @@ public class AccountController {
     @ResponseBody
     String login(String username,String password) throws JsonProcessingException {
         HashMap<String,Object> hs=new HashMap<>();
+        System.out.println(username+"  "+password);
         if(accountService.judgeLoad(username,password)){
             hs.put("token",username);
             hs.put("type",accountService.selectAccountType(username));
@@ -39,8 +40,8 @@ public class AccountController {
             return "false";
         }
     }
-    @RequestMapping(value = "/selectInformation",method =RequestMethod.GET)
-    List<Account> selectInformation(NativeWebRequest webRequest){
+    @RequestMapping(value = "/selectOneInformation",method =RequestMethod.GET)
+    List<Account> selectOneInformation(NativeWebRequest webRequest){
         System.out.println(webRequest.getHeader("token"));
         System.out.println(webRequest.getParameter("token"));
         return accountService.selectOneInformation(webRequest.getParameter("token"));
