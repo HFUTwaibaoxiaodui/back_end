@@ -34,4 +34,7 @@ public class AccountService {
     public List<Account> selectOneInformation(String accountName){return accountMapper.selectOneInformation(accountName);}
 
     public String selectAccountType(String accountName){return accountMapper.selectAccountType(accountName);}
+
+    public boolean phoneIsExist(String phone){return accountMapper.phoneIsExist(phone);}
+    public boolean accountNameIsExist(String accountName){return accountMapper.accountNameIsExist(accountName);}
 }

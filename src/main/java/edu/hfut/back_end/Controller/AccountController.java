@@ -46,10 +46,21 @@ public class AccountController {
         return accountService.selectOneInformation(webRequest.getParameter("token"));
     }
 
-    @RequestMapping(value="/usersignin",method =RequestMethod.GET)
-    void signIn(Account account){
+    @RequestMapping(value="/usersignin",method =RequestMethod.POST)
+    String signIn(@RequestBody Account account){
         Date currentTime=new Date();
+        account.setAccountType("USER");
+        account.setAccountState("正常");
         account.setCurrentTime(currentTime);
-        accountService.signIn(account);
+        if(accountService.phoneIsExist(account.getPhone())){
+           return "手机号重复";
+        }
+        else if(accountService.accountNameIsExist(account.getAccountName())){
+            return "用户名重复";
+        }
+        else{
+            accountService.signIn(account);
+            return "注册成功";
+        }
     }
 }

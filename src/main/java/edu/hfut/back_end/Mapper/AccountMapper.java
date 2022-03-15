@@ -13,4 +13,6 @@ public interface AccountMapper {
     void updateLoginTime(Date loginTime,String accountName);
     List<Account> selectOneInformation(String accountName);
     String selectAccountType(String accountName);
+    boolean phoneIsExist(String phone);
+    boolean accountNameIsExist(String accountName);
 }

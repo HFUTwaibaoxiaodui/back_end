@@ -22,6 +22,16 @@
         select account_type from account where account_name=#{accountName}
     </select>
 
+    <select id="phoneIsExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(phone)
+                  from account where phone = #{phone}]]>
+    </select>
+
+    <select id="accountNameIsExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(account_name)
+                  from account where account_name = #{accountName}]]>
+    </select>
+
 
     <insert id="signIn" parameterType="edu.hfut.back_end.Entity.Account">
         insert into account(account_name,account_type,imagePath,password,real_name,phone,address,area,last_login_time
