@@ -62,9 +62,23 @@ public class PatrolOrderController {
 
     @RequestMapping(value = "/findByOrderTitle", method = RequestMethod.GET)
     @ApiOperation(value = "通过工单标题查询工单信息", notes = "通过工单标题查询工单信息")
-    public List<PatrolOrder> findByName(String orderTitle) {
+    public List<PatrolOrder> findByOrderTitle(String orderTitle) {
         log.info("通过工单标题{}查询", orderTitle);
         return patrolOrderService.findByOrderTitle(orderTitle);
+    }
+
+    @RequestMapping(value = "/findByOrderNumber", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单编号查询工单信息", notes = "通过工单编号查询工单信息")
+    public List<PatrolOrder> findByOrderNumber(String orderNumber) {
+        log.info("通过工单编号{}查询", orderNumber);
+        return patrolOrderService.findByOrderNumber(orderNumber);
+    }
+
+    @RequestMapping(value = "/findByOrderState", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单状态查询工单信息", notes = "通过工单状态查询工单信息")
+    public List<PatrolOrder> findByOrderState(String orderState) {
+        log.info("通过工单状态{}查询", orderState);
+        return patrolOrderService.findByOrderState(orderState);
     }
 
 }

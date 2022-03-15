@@ -18,6 +18,8 @@ public class PatrolOrder {
 
     String orderNumber;
 
+    String orderState;
+
     String orderAddress;
 
     Date planStartTime;
