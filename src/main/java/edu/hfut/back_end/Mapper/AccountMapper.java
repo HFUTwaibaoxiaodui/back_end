@@ -12,4 +12,5 @@ public interface AccountMapper {
     String searchPassword(String username);
     void updateLoginTime(Date loginTime,String accountName);
     List<Account> selectOneInformation(String accountName);
+    String selectAccountType(String accountName);
 }

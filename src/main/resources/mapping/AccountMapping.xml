@@ -18,6 +18,10 @@
         from account where account_name=#{accountName}
     </select>
 
+    <select id="selectAccountType" resultType="java.lang.String">
+        select account_type from account where account_name=#{accountName}
+    </select>
+
 
     <insert id="signIn" parameterType="edu.hfut.back_end.Entity.Account">
         insert into account(account_name,account_type,imagePath,password,real_name,phone,address,area,last_login_time

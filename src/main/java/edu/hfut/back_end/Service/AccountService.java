@@ -32,4 +32,6 @@ public class AccountService {
     }
 
     public List<Account> selectOneInformation(String accountName){return accountMapper.selectOneInformation(accountName);}
+
+    public String selectAccountType(String accountName){return accountMapper.selectAccountType(accountName);}
 }

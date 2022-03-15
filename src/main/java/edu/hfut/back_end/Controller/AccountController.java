@@ -30,6 +30,7 @@ public class AccountController {
         HashMap<String,Object> hs=new HashMap<>();
         if(accountService.judgeLoad(username,password)){
             hs.put("token",username);
+            hs.put("type",accountService.selectAccountType(username));
             ObjectMapper objectMapper=new ObjectMapper();
             accountService.updateLoginTime(username);
             return objectMapper.writeValueAsString(hs);
