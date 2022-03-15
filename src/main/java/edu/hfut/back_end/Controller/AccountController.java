@@ -7,10 +7,12 @@ import edu.hfut.back_end.Service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,13 +29,20 @@ public class AccountController {
     String login(String username,String password) throws JsonProcessingException {
         HashMap<String,Object> hs=new HashMap<>();
         if(accountService.judgeLoad(username,password)){
-            hs.put("token",username+","+password);
+            hs.put("token",username);
             ObjectMapper objectMapper=new ObjectMapper();
+            accountService.updateLoginTime(username);
             return objectMapper.writeValueAsString(hs);
         }
         else{
             return "false";
         }
+    }
+    @RequestMapping(value = "/selectInformation",method =RequestMethod.GET)
+    List<Account> selectInformation(NativeWebRequest webRequest){
+        System.out.println(webRequest.getHeader("token"));
+        System.out.println(webRequest.getParameter("token"));
+        return accountService.selectOneInformation(webRequest.getParameter("token"));
     }
 
     @RequestMapping(value="/usersignin",method =RequestMethod.GET)

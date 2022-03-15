@@ -5,6 +5,8 @@ import edu.hfut.back_end.Mapper.AccountMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -13,7 +15,7 @@ public class AccountService {
 
     public boolean judgeLoad(String username,String password){
         String searchPassword=accountMapper.searchPassword(username);
-        if(searchPassword==null||searchPassword!=password){
+        if(searchPassword==null||!searchPassword.equals(password)){
             return false;
         }
         else{
@@ -21,7 +23,13 @@ public class AccountService {
         }
     }
 
+    public void updateLoginTime(String accountName){
+        accountMapper.updateLoginTime(new Date(),accountName);
+    }
+
     public void signIn(Account account){
         accountMapper.signIn(account);
     }
+
+    public List<Account> selectOneInformation(String accountName){return accountMapper.selectOneInformation(accountName);}
 }
