@@ -28,5 +28,6 @@ public class PatrolOrder {
 
     Date gmtCreate;
 
-    Date gntModified;
+    Date gmtModified;
+
 }

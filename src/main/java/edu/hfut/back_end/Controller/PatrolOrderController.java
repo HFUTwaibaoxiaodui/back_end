@@ -6,11 +6,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -38,9 +36,27 @@ public class PatrolOrderController {
         log.info("开始新增工单...{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
-        patrolOrder.setGntModified(date);
+        patrolOrder.setGmtModified(date);
         patrolOrder.setPlanStartTime(date);
         patrolOrder.setPlanEndTime(date);
         patrolOrderService.insert(patrolOrder);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ApiOperation(value = "更新", notes = "更新")
+    public void updateUser(PatrolOrder patrolOrder) {
+        log.info("开始更新...{}", patrolOrder);
+        Date date = new Date();
+        patrolOrder.setGmtModified(date);
+        patrolOrder.setPlanStartTime(date);
+        patrolOrder.setPlanEndTime(date);
+        patrolOrderService.update(patrolOrder);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @ApiOperation(value = "删除", notes = "删除")
+    public void delete(@RequestParam(value = "orderId", required = true) BigInteger orderId) {
+        log.info("开始删除...orderId={}", orderId);
+        patrolOrderService.delete(orderId);
     }
 }

@@ -14,7 +14,7 @@
         <result column="plan_end_time" jdbcType="DATE" property="planEndTime" />
         <result column="score" jdbcType="INTEGER" property="score" />
         <result column="gmt_create" jdbcType="DATE" property="gmtCreate" />
-        <result column="gmt_modified" jdbcType="DATE" property="gntModified" />
+        <result column="gmt_modified" jdbcType="DATE" property="gmtModified" />
     </resultMap>
 
 
@@ -25,7 +25,15 @@
 
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id" useGeneratedKeys="true">
         insert into patrol_order(order_id, creator_id, order_title, order_description, order_number, order_address, plan_start_time, plan_end_time, score, gmt_create, gmt_modified)
-        values(#{orderId}, #{creatorId}, #{orderTitle}, #{orderDescription}, #{orderNumber}, #{orderAddress}, #{planStartTime}, #{planEndTime}, #{score}, #{gmtCreate}, #{gntModified})
+        values(#{orderId}, #{creatorId}, #{orderTitle}, #{orderDescription}, #{orderNumber}, #{orderAddress}, #{planStartTime}, #{planEndTime}, #{score}, #{gmtCreate}, #{gmtModified})
     </insert>
+
+    <update id="update" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
+        update patrol_order set order_id = #{orderId}, creator_id = #{creatorId}, order_title = #{orderTitle}, order_description = #{orderDescription}, order_number = #{orderNumber}, order_address = #{orderAddress}, plan_start_time = #{planStartTime}, plan_end_time = #{planEndTime}, score = #{score}, gmt_modified = #{gmtModified} where order_id = #{orderId}
+    </update>
+
+    <delete id="delete" parameterType="BigInteger">
+        delete from patrol_order where order_id = #{orderId}
+    </delete>
     
 </mapper>
