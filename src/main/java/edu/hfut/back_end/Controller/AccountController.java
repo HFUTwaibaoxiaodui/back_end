@@ -44,7 +44,7 @@ public class AccountController {
     List<Account> selectOneInformation(NativeWebRequest webRequest){
         System.out.println(webRequest.getHeader("token"));
         System.out.println(webRequest.getParameter("token"));
-        return accountService.selectOneInformation(webRequest.getParameter("token"));
+        return accountService.selectOneInformation(webRequest.getHeader("token"));
     }
 
     @RequestMapping(value="/usersignin",method =RequestMethod.POST)
