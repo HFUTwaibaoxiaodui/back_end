@@ -33,7 +33,7 @@ public class PatrolOrderController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增", notes = "新增")
     public void insert(PatrolOrder patrolOrder) {
-        log.info("开始新增...{}", patrolOrder);
+        log.info("新增{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
         patrolOrder.setGmtModified(date);
@@ -45,7 +45,7 @@ public class PatrolOrderController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     @ApiOperation(value = "更新", notes = "更新")
     public void updateUser(PatrolOrder patrolOrder) {
-        log.info("开始更新...{}", patrolOrder);
+        log.info("更新{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtModified(date);
         patrolOrder.setPlanStartTime(date);
@@ -56,8 +56,15 @@ public class PatrolOrderController {
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除", notes = "删除")
     public void delete(@RequestParam(value = "orderId", required = true) BigInteger orderId) {
-        log.info("开始删除...orderId={}", orderId);
+        log.info("删除orderId={}", orderId);
         patrolOrderService.delete(orderId);
+    }
+
+    @RequestMapping(value = "/findByOrderTitle", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单标题查询工单信息", notes = "通过工单标题查询工单信息")
+    public List<PatrolOrder> findByName(String orderTitle) {
+        log.info("通过工单标题{}查询", orderTitle);
+        return patrolOrderService.findByOrderTitle(orderTitle);
     }
 
 }

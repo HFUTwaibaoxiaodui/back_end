@@ -14,5 +14,6 @@ public interface PatrolOrderMapper {
     void insert(PatrolOrder patrolOrder);
     void update(PatrolOrder patrolOrder);
     void delete(@Param("orderId") BigInteger orderId);
+    List<PatrolOrder> findByOrderTitle(@Param("orderTitle") String orderTitle);
 
 }

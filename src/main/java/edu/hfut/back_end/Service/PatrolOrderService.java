@@ -30,4 +30,8 @@ public class PatrolOrderService {
         patrolOrderMapper.delete(orderId);
     }
 
+    public List<PatrolOrder> findByOrderTitle(String orderTitle){
+        return patrolOrderMapper.findByOrderTitle(orderTitle);
+    }
+
 }
