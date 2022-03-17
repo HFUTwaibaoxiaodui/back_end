@@ -42,4 +42,8 @@ public class PatrolOrderService {
         return patrolOrderMapper.findByOrderState(orderState);
     }
 
+    public PatrolOrder findByOrderId(BigInteger orderId) {
+        return patrolOrderMapper.findByOrderId(orderId);
+    }
+
 }

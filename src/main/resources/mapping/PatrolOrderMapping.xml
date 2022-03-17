@@ -92,4 +92,21 @@
         </where>
     </select>
 
+    <select id="findByOrderId" resultMap="PatrolOrderResultMap">
+        select order_id,
+               creator_id,
+               order_title,
+               order_description,
+               order_number,
+               order_state,
+               order_address,
+               plan_start_time,
+               plan_end_time,
+               score,
+               gmt_create,
+               gmt_modified
+        from patrol_order
+        where order_id = #{orderId}
+    </select>
+
 </mapper>

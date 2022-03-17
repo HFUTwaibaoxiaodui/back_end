@@ -24,4 +24,6 @@ public interface PatrolOrderMapper {
 
     List<PatrolOrder> findByOrderState(@Param("orderState") String orderState);
 
+    PatrolOrder findByOrderId(@Param("orderId") BigInteger orderId);
+
 }

@@ -95,4 +95,16 @@ public class PatrolOrderController {
         return patrolOrderService.findByOrderState(orderState);
     }
 
+    @RequestMapping(value = "/findByOrderId", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单id查询工单信息", notes = "通过工单id查询工单信息")
+    public PatrolOrder findByOrderId(BigInteger orderId) {
+        log.info("通过工单id{}查询", orderId);
+        PatrolOrder patrolOrder = patrolOrderService.findByOrderId(orderId);
+        patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
+        patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
+        patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
+        patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+        return patrolOrder;
+    }
+
 }
