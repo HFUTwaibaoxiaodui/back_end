@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @Slf4j
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/account")
 public class AccountController {
 
     @Autowired
@@ -49,6 +49,7 @@ public class AccountController {
 
     @RequestMapping(value="/usersignin",method =RequestMethod.POST)
     String signIn(@RequestBody Account account){
+        System.out.println(account);
         Date currentTime=new Date();
         account.setAccountType("USER");
         account.setAccountState("正常");
@@ -69,5 +70,10 @@ public class AccountController {
     void updateInformation(@RequestBody Account account){
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
+    }
+
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.DELETE)
+    void deleteUser(String accountName){
+
     }
 }

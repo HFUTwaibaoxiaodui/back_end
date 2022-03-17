@@ -17,4 +17,5 @@ public interface AccountMapper {
     boolean accountNameIsExist(String accountName);
     List<Account> selectAllInformation();
     void updateInformation(Account account);
+    void deleteUser(String accountName);
 }

@@ -39,5 +39,7 @@ public class AccountService {
     public boolean accountNameIsExist(String accountName){return accountMapper.accountNameIsExist(accountName);}
     public List<Account> selectAllInformation(){return accountMapper.selectAllInformation();}
     public void updateInformation(Account account){accountMapper.updateInformation(account);}
-
+    public void deleteUser(String accountName){
+        accountMapper.deleteUser(accountName);
+    }
 }

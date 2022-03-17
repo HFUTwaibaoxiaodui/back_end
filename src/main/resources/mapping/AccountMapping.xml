@@ -42,7 +42,7 @@
         insert into account(account_name,account_type,imagePath,password,real_name,phone,address,area,last_login_time
                            ,account_state,gmt_create,gmt_modified) values
         (#{accountName},#{accountType},#{imagePath},#{password},#{realName},#{phone},#{address},#{area},#{currentTime},
-         #{accountState},#{currentTime},#{currentTime}) for update
+         #{accountState},#{currentTime},#{currentTime})
     </insert>
 
     <select id="searchPassword" resultType="java.lang.String">
@@ -59,4 +59,8 @@
                            gmt_modified=#{currentTime} where account_name=#{accountName}
 
     </update>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+
+    </delete>
 </mapper>
