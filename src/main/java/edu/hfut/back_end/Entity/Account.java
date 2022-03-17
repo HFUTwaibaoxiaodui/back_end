@@ -19,7 +19,7 @@ public class Account {
     Date currentTime;
     String accountState;
 
-    public void setCurrentTime(Date currentTime){
-        this.currentTime=currentTime;
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
     }
 }

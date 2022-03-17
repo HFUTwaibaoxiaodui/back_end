@@ -3,60 +3,99 @@
 <mapper namespace="edu.hfut.back_end.Mapper.AccountMapper">
 
     <resultMap id="personalInformation" type="edu.hfut.back_end.Entity.Account">
-        <result column="account_id" jdbcType="BIGINT" property="accountId" />
-        <result column="account_name" jdbcType="VARCHAR" property="accountName" />
-        <result column="account_type" jdbcType="VARCHAR" property="accountType" />
-        <result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
-        <result column="real_name" jdbcType="VARCHAR" property="realName" />
-        <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="address" jdbcType="VARCHAR" property="address" />
-        <result column="area" jdbcType="VARCHAR" property="area" />
-        <result column="account_state" jdbcType="VARCHAR" property="accountState" />
+        <result column="account_id" jdbcType="BIGINT" property="accountId"/>
+        <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
+        <result column="account_type" jdbcType="VARCHAR" property="accountType"/>
+        <result column="imagePath" jdbcType="VARCHAR" property="imagePath"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="account_state" jdbcType="VARCHAR" property="accountState"/>
     </resultMap>
 
     <select id="selectAllInformation" resultMap="personalInformation">
-        select account_id,account_name,account_type,imagePath,real_name,phone,address,area,account_state
+        select account_id,
+               account_name,
+               account_type,
+               imagePath,
+               real_name,
+               phone,
+               address,
+               area,
+               account_state
         from account
     </select>
     <select id="selectOneInformation" resultMap="personalInformation">
-        select account_id,account_name,account_type,imagePath,real_name,phone,address,area,account_state
-        from account where account_name=#{accountName}
+        select account_id,
+               account_name,
+               account_type,
+               imagePath,
+               real_name,
+               phone,
+               address,
+               area,
+               account_state
+        from account
+        where account_name = #{accountName}
     </select>
 
     <select id="selectAccountType" resultType="java.lang.String">
-        select account_type from account where account_name=#{accountName}
+        select account_type
+        from account
+        where account_name = #{accountName}
     </select>
 
     <select id="phoneIsExist" resultType="java.lang.Boolean">
-        <![CDATA[ select count(phone)
-                  from account where phone = #{phone}]]>
+        <![CDATA[
+        select count(phone)
+        from account
+        where phone = #{phone}
+        ]]>
     </select>
 
     <select id="accountNameIsExist" resultType="java.lang.Boolean">
-        <![CDATA[ select count(account_name)
-                  from account where account_name = #{accountName}]]>
+        <![CDATA[
+        select count(account_name)
+        from account
+        where account_name = #{accountName}
+        ]]>
     </select>
 
 
     <insert id="signIn" parameterType="edu.hfut.back_end.Entity.Account">
-        insert into account(account_name,account_type,imagePath,password,real_name,phone,address,area,last_login_time
-                           ,account_state,gmt_create,gmt_modified) values
-        (#{accountName},#{accountType},#{imagePath},#{password},#{realName},#{phone},#{address},#{area},#{currentTime},
-         #{accountState},#{currentTime},#{currentTime}) for update
+        insert into account( account_name, account_type, imagePath, password, real_name, phone, address, area
+                           , last_login_time
+                           , account_state, gmt_create, gmt_modified)
+        values (#{accountName}, #{accountType}, #{imagePath}, #{password}, #{realName}, #{phone}, #{address}, #{area},
+                #{currentTime},
+                #{accountState}, #{currentTime}, #{currentTime}) for
+        update
     </insert>
 
     <select id="searchPassword" resultType="java.lang.String">
-        select password from account where account_name=#{username}
+        select password
+        from account
+        where account_name = #{username}
     </select>
 
-    <update id="updateLoginTime" >
-        update account set last_login_time=#{loginTime} where account_name=#{accountName}
+    <update id="updateLoginTime">
+        update account
+        set last_login_time=#{loginTime}
+        where account_name = #{accountName}
     </update>
 
     <update id="updateInformation" parameterType="edu.hfut.back_end.Entity.Account">
-        update account set account_type=#{accountType},imagePath=#{imagePath},real_name=#{realName},phone=#{phone},
-                           address=#{address},area=#{area},gmt_create=#{currentTime},
-                           gmt_modified=#{currentTime} where account_name=#{accountName}
+        update account
+        set account_type=#{accountType},
+            imagePath=#{imagePath},
+            real_name=#{realName},
+            phone=#{phone},
+            address=#{address},
+            area=#{area},
+            gmt_create=#{currentTime},
+            gmt_modified=#{currentTime}
+        where account_name = #{accountName}
 
     </update>
 

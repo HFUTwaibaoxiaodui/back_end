@@ -11,13 +11,22 @@ import java.util.List;
 @Mapper
 public interface AccountMapper {
     void signIn(Account account);
+
     String searchPassword(String username);
-    void updateLoginTime(Date loginTime,String accountName);
+
+    void updateLoginTime(Date loginTime, String accountName);
+
     List<Account> selectOneInformation(String accountName);
+
     String selectAccountType(String accountName);
+
     boolean phoneIsExist(String phone);
+
     boolean accountNameIsExist(String accountName);
+
     List<Account> selectAllInformation();
+
     void updateInformation(Account account);
+
     Account findAccountNameByAccountId(@Param("accountId") BigInteger accountId);
 }
