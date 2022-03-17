@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是用于绑定Dao接口的，即面向接口编程-->
+<mapper namespace="edu.hfut.back_end.Mapper.PatrolOrderMapper">
+
+    <resultMap id="PatrolOrderResultMap" type="edu.hfut.back_end.Entity.PatrolOrder">
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="creator_id" jdbcType="BIGINT" property="creatorId"/>
+        <result column="order_title" jdbcType="VARCHAR" property="orderTitle"/>
+        <result column="order_description" jdbcType="VARCHAR" property="orderDescription"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="order_state" jdbcType="VARCHAR" property="orderState"/>
+        <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
+        <result column="plan_start_time" jdbcType="TIMESTAMP" property="planStartTime"/>
+        <result column="plan_end_time" jdbcType="TIMESTAMP" property="planEndTime"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="PatrolOrderResultMap" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
+        select order_id,
+               creator_id,
+               order_title,
+               order_description,
+               order_number,
+               order_state,
+               order_address,
+               plan_start_time,
+               plan_end_time,
+               score,
+               gmt_create,
+               gmt_modified
+        from patrol_order
+    </select>
+
+    <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id"
+            useGeneratedKeys="true">
+        insert into patrol_order(order_id, creator_id, order_title, order_description, order_number, order_state,
+                                 order_address, plan_start_time, plan_end_time, score, gmt_create, gmt_modified)
+        values (#{orderId}, #{creatorId}, #{orderTitle}, #{orderDescription}, #{orderNumber}, #{orderState},
+                #{orderAddress}, #{planStartTime}, #{planEndTime}, #{score}, #{gmtCreate}, #{gmtModified})
+    </insert>
+
+    <update id="update" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
+        update patrol_order
+        set order_id          = #{orderId},
+            creator_id        = #{creatorId},
+            order_title       = #{orderTitle},
+            order_description = #{orderDescription},
+            order_number      = #{orderNumber},
+            order_state       = #{orderState},
+            order_address     = #{orderAddress},
+            plan_start_time   = #{planStartTime},
+            plan_end_time     = #{planEndTime},
+            score             = #{score},
+            gmt_modified      = #{gmtModified}
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="delete" parameterType="BigInteger">
+        delete
+        from patrol_order
+        where order_id = #{orderId}
+    </delete>
+
+    <select id="findByOrderTitle" resultMap="PatrolOrderResultMap">
+        select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
+        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        from patrol_order
+        <where>
+            order_title like "%"#{orderTitle, jdbcType=VARCHAR}"%"
+        </where>
+    </select>
+
+    <select id="findByOrderNumber" resultMap="PatrolOrderResultMap">
+        select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
+        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        from patrol_order
+        <where>
+            order_number like "%"#{orderNumber, jdbcType=VARCHAR}"%"
+        </where>
+    </select>
+
+    <select id="findByOrderState" resultMap="PatrolOrderResultMap">
+        select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
+        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        from patrol_order
+        <where>
+            order_state like "%"#{orderState, jdbcType=VARCHAR}"%"
+        </where>
+    </select>
+
+</mapper>
