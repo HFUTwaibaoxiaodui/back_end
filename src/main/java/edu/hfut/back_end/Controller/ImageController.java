@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/img")
-@Api(value = "本地图片服务器接口", tags = "本地图片服务器接口" )
+@Api(value = "本地图片服务器接口", tags = "本地图片服务器接口")
 public class ImageController {
 
     // 注入配置中图片保存路径

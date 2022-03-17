@@ -1,6 +1,8 @@
 package edu.hfut.back_end.Controller;
 
+import edu.hfut.back_end.Entity.OperationLog;
 import edu.hfut.back_end.Entity.PatrolOrder;
+import edu.hfut.back_end.Service.OperationLogService;
 import edu.hfut.back_end.Service.PatrolOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,18 +18,24 @@ import java.util.List;
 @CrossOrigin
 @Slf4j
 @RequestMapping(value = "/PatrolOrder")
-@Api(value = "工单接口", tags = "工单接口" )
+@Api(value = "工单接口", tags = "工单接口")
 public class PatrolOrderController {
 
     @Autowired
     private PatrolOrderService patrolOrderService;
 
-    @RequestMapping(value="/selectAll", method = RequestMethod.GET)
+    @Autowired
+    private OperationLogService operationLogService;
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @ApiOperation(value = "查找全部工单信息", notes = "查找全部工单信息")
     public List<PatrolOrder> selectAll() {
-        List<PatrolOrder> list = patrolOrderService.selectAll();
-        log.info("查找全部工单信息：{}", list);
-        return list;
+        List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
+        for (PatrolOrder patrolOrder : patrolOrderList) {
+            patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
+        }
+        log.info("查找全部工单信息：{}", patrolOrderList);
+        return patrolOrderList;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

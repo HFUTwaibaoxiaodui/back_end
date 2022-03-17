@@ -4,16 +4,22 @@
 <mapper namespace="edu.hfut.back_end.Mapper.OperationLogMapper">
 
     <resultMap id="OperationLogResultMap" type="edu.hfut.back_end.Entity.OperationLog">
-        <result column="id" jdbcType="BIGINT" property="id" />
-        <result column="operator_id" jdbcType="BIGINT" property="operatorId" />
-        <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
-        <result column="description" jdbcType="VARCHAR" property="description" />
-        <result column="operation_time" jdbcType="DATE" property="operationTime" />
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="operation_name" jdbcType="VARCHAR" property="operationName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="operation_time" jdbcType="TIMESTAMP" property="operationTime"/>
     </resultMap>
 
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.OperationLog" keyColumn="id" useGeneratedKeys="true">
-        insert into operation_log(id, operator_id, operation_name, description, operation_time)
-        values(#{id}, #{operatorId}, #{operationName}, #{description}, #{operationTime})
+        insert into operation_log(id, order_id, operation_name, description, operation_time)
+        values (#{id}, #{orderId}, #{operationName}, #{description}, #{operationTime})
     </insert>
+
+    <select id="findByOrderId" resultMap="OperationLogResultMap">
+        select id, order_id, operation_name, description, operation_time
+        from operation_log
+        where order_id = #{orderId}
+    </select>
 
 </mapper>

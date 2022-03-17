@@ -11,11 +11,17 @@ import java.util.List;
 public interface PatrolOrderMapper {
 
     List<PatrolOrder> selectAll();
+
     void insert(PatrolOrder patrolOrder);
+
     void update(PatrolOrder patrolOrder);
+
     void delete(@Param("orderId") BigInteger orderId);
+
     List<PatrolOrder> findByOrderTitle(@Param("orderTitle") String orderTitle);
+
     List<PatrolOrder> findByOrderNumber(@Param("orderNumber") String orderNumber);
+
     List<PatrolOrder> findByOrderState(@Param("orderState") String orderState);
 
 }
