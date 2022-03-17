@@ -72,8 +72,4 @@ public class AccountController {
         accountService.updateInformation(account);
     }
 
-    @RequestMapping(value = "/deleteUser",method = RequestMethod.DELETE)
-    void deleteUser(String accountName){
-
-    }
 }

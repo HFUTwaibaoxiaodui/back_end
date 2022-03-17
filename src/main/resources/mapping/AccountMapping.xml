@@ -60,7 +60,4 @@
 
     </update>
 
-    <delete id="deleteUser" parameterType="java.lang.String">
-
-    </delete>
 </mapper>
