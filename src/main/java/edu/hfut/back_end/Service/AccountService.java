@@ -55,8 +55,8 @@ public class AccountService {
         accountMapper.updateInformation(account);
     }
 
-    public Account findAccountNameByAccountId(BigInteger accountId) {
-        return accountMapper.findAccountNameByAccountId(accountId);
+    public Account findContentByAccountId(BigInteger accountId) {
+        return accountMapper.findContentByAccountId(accountId);
     }
 
 }

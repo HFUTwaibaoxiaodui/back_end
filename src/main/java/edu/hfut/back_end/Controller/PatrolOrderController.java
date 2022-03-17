@@ -1,6 +1,5 @@
 package edu.hfut.back_end.Controller;
 
-import edu.hfut.back_end.Entity.OperationLog;
 import edu.hfut.back_end.Entity.PatrolOrder;
 import edu.hfut.back_end.Service.AccountService;
 import edu.hfut.back_end.Service.OperationLogService;
@@ -37,7 +36,9 @@ public class PatrolOrderController {
         List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findAccountNameByAccountId(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
         }
         log.info("查找全部工单信息：{}", patrolOrderList);
         return patrolOrderList;

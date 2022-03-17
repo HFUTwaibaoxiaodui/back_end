@@ -28,5 +28,5 @@ public interface AccountMapper {
 
     void updateInformation(Account account);
 
-    Account findAccountNameByAccountId(@Param("accountId") BigInteger accountId);
+    Account findContentByAccountId(@Param("accountId") BigInteger accountId);
 }
