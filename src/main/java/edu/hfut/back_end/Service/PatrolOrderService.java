@@ -46,4 +46,8 @@ public class PatrolOrderService {
         return patrolOrderMapper.findByOrderId(orderId);
     }
 
+    public void updateOrderState(BigInteger orderId, String orderState) {
+        patrolOrderMapper.updateOrderState(orderId, orderState);
+    }
+
 }

@@ -58,7 +58,7 @@ public class PatrolOrderController {
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     @ApiOperation(value = "更新", notes = "更新")
-    public void updateUser(PatrolOrder patrolOrder) {
+    public void update(PatrolOrder patrolOrder) {
         log.info("更新{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtModified(date);
@@ -105,6 +105,13 @@ public class PatrolOrderController {
         patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
         patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
         return patrolOrder;
+    }
+
+    @RequestMapping(value = "/updateOrderState", method = RequestMethod.PUT)
+    @ApiOperation(value = "更新工单状态", notes = "更新工单状态")
+    public void updateOrderState(BigInteger orderId, String orderState) {
+        log.info("更新工单{}状态为{}", orderId, orderState);
+        patrolOrderService.updateOrderState(orderId, orderState);
     }
 
 }
