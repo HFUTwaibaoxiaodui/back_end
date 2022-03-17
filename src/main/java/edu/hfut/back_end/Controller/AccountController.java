@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hfut.back_end.Entity.Account;
 import edu.hfut.back_end.Service.AccountService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 @CrossOrigin
 @Slf4j
 @RequestMapping(value = "/login")
+@Api(value = "人员账户接口", tags = "人员账户接口")
 public class AccountController {
 
     @Autowired
