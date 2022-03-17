@@ -2,6 +2,7 @@ package edu.hfut.back_end.Controller;
 
 import edu.hfut.back_end.Entity.OperationLog;
 import edu.hfut.back_end.Entity.PatrolOrder;
+import edu.hfut.back_end.Service.AccountService;
 import edu.hfut.back_end.Service.OperationLogService;
 import edu.hfut.back_end.Service.PatrolOrderService;
 import io.swagger.annotations.Api;
@@ -27,12 +28,16 @@ public class PatrolOrderController {
     @Autowired
     private OperationLogService operationLogService;
 
+    @Autowired
+    private AccountService accountService;
+
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @ApiOperation(value = "查找全部工单信息", notes = "查找全部工单信息")
     public List<PatrolOrder> selectAll() {
         List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
+            patrolOrder.setCreatorName(accountService.findAccountNameByAccountId(patrolOrder.getCreatorId()).getRealName());
         }
         log.info("查找全部工单信息：{}", patrolOrderList);
         return patrolOrderList;

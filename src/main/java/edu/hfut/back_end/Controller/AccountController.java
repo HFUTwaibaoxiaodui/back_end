@@ -3,13 +3,16 @@ package edu.hfut.back_end.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hfut.back_end.Entity.Account;
+import edu.hfut.back_end.Entity.OperationLog;
 import edu.hfut.back_end.Service.AccountService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -70,4 +73,11 @@ public class AccountController {
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
     }
+
+    @RequestMapping(value = "/findAccountNameByAccountId", method = RequestMethod.GET)
+    @ApiOperation(value = "通过accountId查询accountName", notes = "通过orderId查询操作记录")
+    public Account findAccountNameByAccountId(BigInteger accountId) {
+        return accountService.findAccountNameByAccountId(accountId);
+    }
+
 }

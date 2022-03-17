@@ -14,6 +14,8 @@ public class PatrolOrder {
 
     BigInteger creatorId;
 
+    String creatorName;
+
     String orderTitle;
 
     String orderDescription;

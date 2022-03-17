@@ -59,4 +59,11 @@
                            gmt_modified=#{currentTime} where account_name=#{accountName}
 
     </update>
+
+    <select id="findAccountNameByAccountId" resultMap="personalInformation">
+        select account_name, real_name
+        from account
+        where account_id = #{accountId}
+    </select>
+
 </mapper>

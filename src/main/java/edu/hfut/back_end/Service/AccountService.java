@@ -5,6 +5,7 @@ import edu.hfut.back_end.Mapper.AccountMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -39,5 +40,9 @@ public class AccountService {
     public boolean accountNameIsExist(String accountName){return accountMapper.accountNameIsExist(accountName);}
     public List<Account> selectAllInformation(){return accountMapper.selectAllInformation();}
     public void updateInformation(Account account){accountMapper.updateInformation(account);}
+
+    public Account findAccountNameByAccountId(BigInteger accountId) {
+        return accountMapper.findAccountNameByAccountId(accountId);
+    }
 
 }

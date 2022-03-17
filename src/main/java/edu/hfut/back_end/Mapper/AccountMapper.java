@@ -2,7 +2,9 @@ package edu.hfut.back_end.Mapper;
 
 import edu.hfut.back_end.Entity.Account;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -17,4 +19,5 @@ public interface AccountMapper {
     boolean accountNameIsExist(String accountName);
     List<Account> selectAllInformation();
     void updateInformation(Account account);
+    Account findAccountNameByAccountId(@Param("accountId") BigInteger accountId);
 }
