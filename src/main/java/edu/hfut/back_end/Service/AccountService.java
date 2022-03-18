@@ -40,5 +40,5 @@ public class AccountService {
     public boolean accountNameIsExist(String accountName){return accountMapper.accountNameIsExist(accountName);}
     public List<Account> selectAllInformation(){return accountMapper.selectAllInformation();}
     public void updateInformation(Account account){accountMapper.updateInformation(account);}
-    public List<Account> selectInformationById(BigInteger accountId){return accountMapper.selectInformationById(accountId);}
+    public Account selectInformationById(BigInteger accountId){return accountMapper.selectInformationById(accountId);}
 }

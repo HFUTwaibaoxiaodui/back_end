@@ -36,9 +36,9 @@ public class PatrolOrderController {
         List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+            patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         }
         log.info("查找全部工单信息：{}", patrolOrderList);
         return patrolOrderList;
@@ -101,9 +101,9 @@ public class PatrolOrderController {
         log.info("通过工单id{}查询", orderId);
         PatrolOrder patrolOrder = patrolOrderService.findByOrderId(orderId);
         patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-        patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-        patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-        patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+        patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+        patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+        patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         return patrolOrder;
     }
 
@@ -122,9 +122,9 @@ public class PatrolOrderController {
         resultList.clear();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+            patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         }
         Date date = new Date();
         for (PatrolOrder patrolOrder : patrolOrderList) {

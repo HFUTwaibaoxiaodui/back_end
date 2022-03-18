@@ -54,7 +54,7 @@ public class AccountController {
 
     @RequestMapping(value = "/selectInformationbyid",method = RequestMethod.GET)
     @ApiOperation(value = "根据id查找某个人信息")
-    List<Account> selectInformationById(BigInteger accountId){
+    Account selectInformationById(BigInteger accountId){
         return accountService.selectInformationById(accountId);
     }
 
