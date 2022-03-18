@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hfut.back_end.Entity.Account;
 import edu.hfut.back_end.Service.AccountService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class AccountController {
     AccountService accountService;
 
     @RequestMapping(value="/userlogin",method =RequestMethod.POST)
-    @ResponseBody
+    @ApiOperation(value = "用户登录")
     String login(String username,String password) throws JsonProcessingException {
         HashMap<String,Object> hs=new HashMap<>();
         System.out.println(username+"  "+password);
@@ -46,6 +47,7 @@ public class AccountController {
         }
     }
     @RequestMapping(value = "/selectOneInformation",method =RequestMethod.GET)
+    @ApiOperation(value = "查找某个用户的信息")
     List<Account> selectOneInformation(NativeWebRequest webRequest){
         System.out.println(webRequest.getHeader("token"));
         System.out.println(webRequest.getParameter("token"));
@@ -53,6 +55,7 @@ public class AccountController {
     }
 
     @RequestMapping(value="/usersignin",method =RequestMethod.POST)
+    @ApiOperation(value = "用户注册")
     String signIn(@RequestBody Account account){
         System.out.println(account);
         Date currentTime=new Date();
@@ -72,12 +75,14 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/updateinformation",method = RequestMethod.PUT)
+    @ApiOperation(value = "用户更新自己信息")
     void updateInformation(@RequestBody Account account){
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
     }
 
     @RequestMapping(value = "/selectAllInformation",method = RequestMethod.GET)
+    @ApiOperation(value = "查找所有用户的信息")
     List<Account> selectAllInformation(){
         List<Account> out=accountService.selectAllInformation();
         for(Account each :out){
