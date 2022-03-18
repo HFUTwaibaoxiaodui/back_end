@@ -56,7 +56,7 @@
     <update id="updateInformation" parameterType="edu.hfut.back_end.Entity.Account">
         update account set account_type=#{accountType},imagePath=#{imagePath},real_name=#{realName},phone=#{phone},
                            address=#{address},area=#{area},gmt_create=#{currentTime},
-                           gmt_modified=#{currentTime} where account_name=#{accountName}
+                           gmt_modified=#{currentTime} where account_id=#{accountId}
 
     </update>
 
