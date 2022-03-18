@@ -28,7 +28,7 @@ public class OrderEvaluateController {
     OrderEvaluateService orderEvaluateService;
 
     @PostMapping(value = "/submitException", produces="application/json; charset=UTF-8")
-    @ApiOperation(value = "上报工单异常", notes = "上报工单异常")
+    @ApiOperation(value = "添加工单评价记录", notes = "添加工单评价记录")
     @ResponseBody
     public boolean addOrderEvaluate(OrderEvaluate orderEvaluate) {
         return orderEvaluateService.addOrderEvaluate(orderEvaluate);
