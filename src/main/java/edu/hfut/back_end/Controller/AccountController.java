@@ -70,4 +70,10 @@ public class AccountController {
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
     }
+
+    @RequestMapping(value = "/findAccountNameByAccountId", method = RequestMethod.GET)
+    @ApiOperation(value = "通过accountId查询信息", notes = "通过accountId查询信息")
+    public Account findContentByAccountId(BigInteger accountId) {
+        return accountService.findContentByAccountId(accountId);
+    }
 }
