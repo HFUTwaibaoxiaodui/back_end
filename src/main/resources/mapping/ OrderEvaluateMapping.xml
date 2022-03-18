@@ -9,7 +9,7 @@
             (#{orderId}, #{situation}, #{description}, #{score})
     </insert>
 
-    <select id="getEvaluateByOrderId" parameterType="edu.hfut.back_end.Entity.OrderEvaluate">
+    <select id="getEvaluateByOrderId" resultType="edu.hfut.back_end.Entity.OrderEvaluate">
         select
             situation, description, score
         from

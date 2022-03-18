@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,5 +33,12 @@ public class OrderEvaluateController {
     @ResponseBody
     public boolean addOrderEvaluate(OrderEvaluate orderEvaluate) {
         return orderEvaluateService.addOrderEvaluate(orderEvaluate);
+    }
+
+    @GetMapping(value = "/getEvaluateByOrderId", produces="application/json; charset=UTF-8")
+    @ApiOperation(value = "根据工单id查询工单评价记录", notes = "根据工单id查询工单评价记录")
+    @ResponseBody
+    public OrderEvaluate getEvaluateByOrderId(int id) {
+        return orderEvaluateService.getEvaluateByOrderId(id);
     }
 }
