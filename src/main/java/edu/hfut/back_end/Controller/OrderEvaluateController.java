@@ -27,7 +27,7 @@ public class OrderEvaluateController {
     @Autowired
     OrderEvaluateService orderEvaluateService;
 
-    @PostMapping(value = "/submitException", produces="application/json; charset=UTF-8")
+    @PostMapping(value = "/addOrderEvaluate", produces="application/json; charset=UTF-8")
     @ApiOperation(value = "添加工单评价记录", notes = "添加工单评价记录")
     @ResponseBody
     public boolean addOrderEvaluate(OrderEvaluate orderEvaluate) {
