@@ -35,8 +35,6 @@ public class PatrolOrder {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     Date planEndTime;
 
-    Integer score;
-
     String phone;
 
     String area;
