@@ -26,15 +26,15 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+    @RequestMapping(value="/userlogin",method =RequestMethod.POST)
     @ResponseBody
-    String login(String username, String password) throws JsonProcessingException {
-        HashMap<String, Object> hs = new HashMap<>();
-        System.out.println(username + "  " + password);
-        if (accountService.judgeLoad(username, password)) {
-            hs.put("token", username);
-            hs.put("type", accountService.selectAccountType(username));
-            ObjectMapper objectMapper = new ObjectMapper();
+    String login(String username,String password) throws JsonProcessingException {
+        HashMap<String,Object> hs=new HashMap<>();
+        System.out.println(username+"  "+password);
+        if(accountService.judgeLoad(username,password)){
+            hs.put("token",username);
+            hs.put("type",accountService.selectAccountType(username));
+            ObjectMapper objectMapper=new ObjectMapper();
             accountService.updateLoginTime(username);
             return objectMapper.writeValueAsString(hs);
         } else {
@@ -49,9 +49,9 @@ public class AccountController {
         return accountService.selectOneInformation(webRequest.getHeader("token"));
     }
 
-    @RequestMapping(value = "/usersignin", method = RequestMethod.POST)
-    String signIn(@RequestBody Account account) {
-        Date currentTime = new Date();
+    @RequestMapping(value="/usersignin",method =RequestMethod.POST)
+    String signIn(@RequestBody Account account){
+        Date currentTime=new Date();
         account.setAccountType("USER");
         account.setAccountState("正常");
         account.setCurrentTime(currentTime);
@@ -70,11 +70,4 @@ public class AccountController {
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
     }
-
-    @RequestMapping(value = "/findAccountNameByAccountId", method = RequestMethod.GET)
-    @ApiOperation(value = "通过accountId查询信息", notes = "通过accountId查询信息")
-    public Account findContentByAccountId(BigInteger accountId) {
-        return accountService.findContentByAccountId(accountId);
-    }
-
 }
