@@ -29,8 +29,8 @@ public class OperationLogController {
     @ApiOperation(value = "新增", notes = "新增")
     public void insert(OperationLog operationLog) {
         log.info("新增...{}", operationLog);
-        Date date = new Date();
-        operationLog.setOperationTime(date);
+/*        Date date = new Date();
+        operationLog.setOperationTime(date);*/
         operationLogService.insert(operationLog);
     }
 

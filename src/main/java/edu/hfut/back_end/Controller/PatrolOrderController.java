@@ -44,15 +44,15 @@ public class PatrolOrderController {
         return patrolOrderList;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     @ApiOperation(value = "新增", notes = "新增")
     public void insert(PatrolOrder patrolOrder) {
         log.info("新增{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
         patrolOrder.setGmtModified(date);
-        patrolOrder.setPlanStartTime(date);
-        patrolOrder.setPlanEndTime(date);
+/*        patrolOrder.setPlanStartTime(date);
+        patrolOrder.setPlanEndTime(date);*/
         patrolOrderService.insert(patrolOrder);
     }
 
@@ -112,6 +112,28 @@ public class PatrolOrderController {
     public void updateOrderState(BigInteger orderId, String orderState) {
         log.info("更新工单{}状态为{}", orderId, orderState);
         patrolOrderService.updateOrderState(orderId, orderState);
+    }
+
+    @RequestMapping(value = "/selectAllNow", method = RequestMethod.GET)
+    @ApiOperation(value = "查找现在全部工单信息", notes = "查找现在全部工单信息")
+    public List<PatrolOrder> selectAllNow() {
+        List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
+        List<PatrolOrder> resultList = patrolOrderService.selectAll();
+        resultList.clear();
+        for (PatrolOrder patrolOrder : patrolOrderList) {
+            patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
+            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+        }
+        Date date = new Date();
+        for (PatrolOrder patrolOrder : patrolOrderList) {
+            if (date.after(patrolOrder.getPlanStartTime()) && date.before(patrolOrder.getPlanEndTime())) {
+                resultList.add(patrolOrder);
+            }
+        }
+        log.info("查找现在全部工单信息：{}", resultList);
+        return resultList;
     }
 
 }

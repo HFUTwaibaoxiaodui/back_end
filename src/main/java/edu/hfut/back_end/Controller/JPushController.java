@@ -6,13 +6,10 @@ import edu.hfut.back_end.Utils.SendUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
@@ -20,10 +17,12 @@ import java.io.*;
 @RequestMapping(value = "/JPush")
 @Api(value = "极光接口", tags = "极光接口")
 public class JPushController {
+
     @ApiOperation(value = "send", notes = "send")
     @PostMapping("/sendMessage")
     public Result sendMessage() {
         PushResult result = SendUtils.testSendPush();
         return Result.ok("保存成功");
     }
+
 }
