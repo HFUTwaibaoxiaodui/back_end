@@ -6,40 +6,33 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 
 @Data
-public class PatrolOrder {
+public class PatrolOrderWorkerEdit {
+
+    BigInteger id;
 
     BigInteger orderId;
 
-    BigInteger creatorId;
+    String siteName;
 
-    String creatorName;
+    String inspectionCategory;
 
-    String orderTitle;
+    String inspectionContent;
 
-    String orderDescription;
+    String inspectionResult;
 
-    String orderNumber;
+    String photo1;
 
-    String orderState;
-
-    String orderAddress;
+    String photo2;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    Date planStartTime;
+    Date beginTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    Date planEndTime;
-
-    Integer score;
-
-    String phone;
-
-    String area;
+    Date endTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -48,7 +41,5 @@ public class PatrolOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     Date gmtModified;
-
-    List<OperationLog> operationLogList;
 
 }
