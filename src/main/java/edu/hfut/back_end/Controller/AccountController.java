@@ -51,6 +51,13 @@ public class AccountController {
             return "false";
         }
     }
+
+    @RequestMapping(value = "/selectInformationbyid",method = RequestMethod.GET)
+    @ApiOperation(value = "根据id查找某个人信息")
+    Account selectInformationById(BigInteger accountId){
+        return accountService.selectInformationById(accountId);
+    }
+
     @RequestMapping(value = "/selectOneInformation",method =RequestMethod.GET)
     List<Account> selectOneInformation(NativeWebRequest webRequest){
         System.out.println(webRequest.getHeader("token"));
