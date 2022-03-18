@@ -1,4 +1,4 @@
-package edu.hfut.back_end;
+package edu.hfut.back_end.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
