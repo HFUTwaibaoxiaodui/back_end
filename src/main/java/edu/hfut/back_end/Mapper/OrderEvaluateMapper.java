@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface OrderEvaluateMapper {
     boolean addOrderEvaluate(OrderEvaluate orderEvaluate);
+    OrderEvaluate getEvaluateByOrderId(int orderId);
 }

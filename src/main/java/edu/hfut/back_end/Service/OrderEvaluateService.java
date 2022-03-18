@@ -19,4 +19,8 @@ public class OrderEvaluateService {
     public boolean addOrderEvaluate(OrderEvaluate orderEvaluate){
         return orderEvaluateMapper.addOrderEvaluate(orderEvaluate);
     }
+
+    public OrderEvaluate getEvaluateByOrderId(int id) {
+        return orderEvaluateMapper.getEvaluateByOrderId(id);
+    }
 }
