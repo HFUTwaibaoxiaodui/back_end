@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hfut.back_end.Mapper.ExceptionOrderMapper">
+
+    <insert id="submitException" parameterType="edu.hfut.back_end.Entity.ExceptionOrder">
+        insert into
+            exception_order(order_id, exception_class, exception_detail, submit_time)
+        values
+            (#{orderId}, #{exceptionClass}, #{exceptionDetail}, #{submitTime})
+    </insert>
+
+</mapper>

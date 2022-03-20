@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hfut.back_end.Mapper.OrderEvaluateMapper">
+
+    <insert id="addOrderEvaluate" parameterType="edu.hfut.back_end.Entity.OrderEvaluate">
+        insert into
+            order_evaluate(order_id, situation, description, score)
+        values
+            (#{orderId}, #{situation}, #{description}, #{score})
+    </insert>
+
+    <select id="getEvaluateByOrderId" resultType="edu.hfut.back_end.Entity.OrderEvaluate">
+        select
+            situation, description, score
+        from
+            order_evaluate
+        where
+            order_id = #{orderId}
+    </select>
+
+</mapper>

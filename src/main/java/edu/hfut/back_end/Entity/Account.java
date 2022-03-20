@@ -22,7 +22,7 @@ public class Account {
     String accountState;
     String firstLetter;
 
-    public void setCurrentTime(Date currentTime){
-        this.currentTime=currentTime;
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
     }
 }

@@ -5,12 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hfut.back_end.Entity.Account;
 import edu.hfut.back_end.Service.AccountService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.math.BigInteger;
+
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,12 +55,11 @@ public class AccountController {
 
     @RequestMapping(value = "/selectInformationbyid",method = RequestMethod.GET)
     @ApiOperation(value = "根据id查找某个人信息")
-    List<Account> selectInformationById(BigInteger accountId){
+    Account selectInformationById(BigInteger accountId){
         return accountService.selectInformationById(accountId);
     }
 
     @RequestMapping(value = "/selectOneInformation",method =RequestMethod.GET)
-    @ApiOperation(value = "查找某个用户的信息")
     List<Account> selectOneInformation(NativeWebRequest webRequest){
         System.out.println(webRequest.getHeader("token"));
         System.out.println(webRequest.getParameter("token"));

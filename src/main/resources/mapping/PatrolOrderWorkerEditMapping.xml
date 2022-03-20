@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace是用于绑定Dao接口的，即面向接口编程-->
+<mapper namespace="edu.hfut.back_end.Mapper.PatrolOrderWorkerEditMapper">
+
+    <resultMap id="PatrolOrderWorkerEditResultMap" type="edu.hfut.back_end.Entity.PatrolOrderWorkerEdit">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="site_name" jdbcType="VARCHAR" property="siteName"/>
+        <result column="inspection_category" jdbcType="VARCHAR" property="inspectionCategory"/>
+        <result column="inspection_content" jdbcType="VARCHAR" property="inspectionContent"/>
+        <result column="inspection_result" jdbcType="VARCHAR" property="inspectionResult"/>
+        <result column="photo1" jdbcType="VARCHAR" property="photo1"/>
+        <result column="photo2" jdbcType="VARCHAR" property="photo2"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="PatrolOrderWorkerEditResultMap"
+            parameterType="edu.hfut.back_end.Entity.PatrolOrderWorkerEdit">
+        select id,
+               order_id,
+               site_name,
+               inspection_category,
+               inspection_content,
+               inspection_result,
+               photo1,
+               photo2,
+               begin_time,
+               end_time,
+               gmt_create,
+               gmt_modified
+        from patrol_order_worker_edit
+    </select>
+
+    <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrderWorkerEdit" keyColumn="id"
+            useGeneratedKeys="true">
+        insert into patrol_order_worker_edit(id, order_id, site_name, inspection_category, inspection_content,
+                                             inspection_result,
+                                             photo1, photo2, begin_time, end_time, gmt_create, gmt_modified)
+        values (#{id}, #{orderId}, #{siteName}, #{inspectionCategory}, #{inspectionContent}, #{inspectionResult},
+                #{photo1}, #{photo2}, #{beginTime}, #{endTime}, #{gmtCreate}, #{gmtModified})
+    </insert>
+
+</mapper>
