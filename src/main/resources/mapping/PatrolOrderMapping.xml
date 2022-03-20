@@ -105,6 +105,38 @@
         where order_id = #{orderId}
     </select>
 
+
+    <resultMap id="OrderCardDetailMap" type="java.util.HashMap">
+        <id column="order_id" property="orderId"/>
+        <result column="order_title" jdbcType="VARCHAR"  property="orderTitle"/>
+        <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+        <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
+        <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderCode"/>
+    </resultMap>
+    
+    <select id="findOrderCardDetail" resultMap="OrderCardDetailMap">
+        select
+            order_id
+            order_title,
+            order_state,
+            creator_name,
+            order_address,
+            create_time,
+            order_number
+        from
+            order_card_detail
+        <where>
+            <if test="orderState != null">
+                and order_state = #{orderState}
+            </if>
+            <if test="workerId != null">
+                and worker_id = #{workerId}
+            </if>
+        </where>
+    </select>
+
     <update id="updateOrderState" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
         update patrol_order
         set order_state = #{orderState}
