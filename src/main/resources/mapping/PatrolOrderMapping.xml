@@ -112,7 +112,7 @@
         <result column="order_state" jdbcType="VARCHAR" property="orderState" />
         <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
         <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="order_number" jdbcType="VARCHAR" property="orderCode"/>
     </resultMap>
     
