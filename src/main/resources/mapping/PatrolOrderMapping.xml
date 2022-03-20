@@ -107,18 +107,18 @@
 
 
     <resultMap id="OrderCardDetailMap" type="java.util.HashMap">
-        <id column="order_id" property="orderId"/>
+        <result column="order_id" jdbcType="INTEGER"  property="orderId"/>
         <result column="order_title" jdbcType="VARCHAR"  property="orderTitle"/>
         <result column="order_state" jdbcType="VARCHAR" property="orderState" />
         <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
         <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="order_number" jdbcType="VARCHAR" property="orderCode"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
     </resultMap>
     
     <select id="findOrderCardDetail" resultMap="OrderCardDetailMap">
         select
-            order_id
+            order_id,
             order_title,
             order_state,
             creator_name,
