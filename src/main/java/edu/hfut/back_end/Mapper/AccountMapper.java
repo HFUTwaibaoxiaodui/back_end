@@ -18,5 +18,6 @@ public interface AccountMapper {
     boolean accountNameIsExist(String accountName);
     List<Account> selectAllInformation();
     void updateInformation(Account account);
-    Account selectInformationById(BigInteger accountId);
+    List<Account> selectInformationById(BigInteger accountId);
+    BigInteger selectIdByAccountName(String accountName);
 }

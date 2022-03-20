@@ -14,6 +14,10 @@
         <result column="account_state" jdbcType="VARCHAR" property="accountState" />
     </resultMap>
 
+    <select id="selectIdByAccountName" resultType="java.math.BigInteger">
+        select account_id from account where account_name=#{accountName}
+    </select>
+
     <select id="selectAllInformation" resultMap="personalInformation">
         select account_id,account_name,account_type,imagePath,password,real_name,phone,address,area,account_state
         from account
