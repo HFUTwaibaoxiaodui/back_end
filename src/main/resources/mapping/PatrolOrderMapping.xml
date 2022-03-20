@@ -107,7 +107,7 @@
 
 
     <resultMap id="OrderCardDetailMap" type="java.util.HashMap">
-        <id column="order_id" property="orderId"/>
+        <result column="order_id" jdbcType="INTEGER"  property="orderId"/>
         <result column="order_title" jdbcType="VARCHAR"  property="orderTitle"/>
         <result column="order_state" jdbcType="VARCHAR" property="orderState" />
         <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
@@ -118,7 +118,7 @@
     
     <select id="findOrderCardDetail" resultMap="OrderCardDetailMap">
         select
-            order_id
+            order_id,
             order_title,
             order_state,
             creator_name,
