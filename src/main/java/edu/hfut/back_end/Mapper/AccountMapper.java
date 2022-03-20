@@ -19,4 +19,5 @@ public interface AccountMapper {
     List<Account> selectAllInformation();
     void updateInformation(Account account);
     List<Account> selectInformationById(BigInteger accountId);
+    BigInteger selectIdByAccountName(String accountName);
 }

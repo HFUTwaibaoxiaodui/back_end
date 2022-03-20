@@ -37,7 +37,8 @@ public class AccountController {
         HashMap<String,Object> hs=new HashMap<>();
         System.out.println(username+"  "+password);
         if(accountService.judgeLoad(username,password)){
-            hs.put("token",username);
+            String accountId=String.valueOf(accountService.selectIdByAccountName(username));
+            hs.put("token",accountId);
             hs.put("type",accountService.selectAccountType(username));
             ObjectMapper objectMapper=new ObjectMapper();
             accountService.updateLoginTime(username);
@@ -53,6 +54,7 @@ public class AccountController {
     List<Account> selectInformationById(BigInteger accountId){
         return accountService.selectInformationById(accountId);
     }
+
     @RequestMapping(value = "/selectOneInformation",method =RequestMethod.GET)
     @ApiOperation(value = "查找某个用户的信息")
     List<Account> selectOneInformation(NativeWebRequest webRequest){

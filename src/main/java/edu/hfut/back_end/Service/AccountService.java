@@ -41,4 +41,5 @@ public class AccountService {
     public List<Account> selectAllInformation(){return accountMapper.selectAllInformation();}
     public void updateInformation(Account account){accountMapper.updateInformation(account);}
     public List<Account> selectInformationById(BigInteger accountId){return accountMapper.selectInformationById(accountId);}
+    public BigInteger selectIdByAccountName(String accountName){return accountMapper.selectIdByAccountName(accountName);}
 }
