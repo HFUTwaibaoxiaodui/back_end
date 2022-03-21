@@ -22,8 +22,10 @@ public class SendUtils {
     protected static final Logger LOG = LoggerFactory.getLogger(SendUtils.class);
 
     // demo App defined in resources/jpush-api.conf
-    protected static final String APP_KEY = "f8d8ccde2fc3cd5c8329e44f";
-    protected static final String MASTER_SECRET = "7d764960df68ef8bdec1754e";
+    protected static final String APP_KEY = "8a44ad1f8ca8a48a829f31f5";
+    protected static final String MASTER_SECRET = "fbb049a74628bce5da8d30c7";
+    /*protected static final String APP_KEY = "f8d8ccde2fc3cd5c8329e44f";
+    protected static final String MASTER_SECRET = "7d764960df68ef8bdec1754e";*/
 
     public static final String ALERT = "测试广播";
 
