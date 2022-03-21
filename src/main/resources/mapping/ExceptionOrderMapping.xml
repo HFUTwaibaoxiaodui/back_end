@@ -4,24 +4,37 @@
 
     <insert id="submitException" parameterType="edu.hfut.back_end.Entity.ExceptionOrder">
         insert into
-            exception_order(order_id, exception_class, exception_detail, submit_time)
+            exception_order(order_id, exception_class, exception_detail, submit_time, last_order_state)
         values
-            (#{orderId}, #{exceptionClass}, #{exceptionDetail}, #{submitTime})
+            (#{orderId}, #{exceptionClass}, #{exceptionDetail}, #{submitTime}, #{lastOrderState})
     </insert>
 
     <resultMap id="ExceptionMessageMap" type="java.util.Map">
         <result column="exception_class" jdbcType="VARCHAR" property="exceptionClass"/>
         <result column="exception_detail" jdbcType="VARCHAR" property="exceptionDetail"/>
+        <result column="last_order_state" jdbcType="VARCHAR" property="lastOrderState"/>
     </resultMap>
 
     <select id="getExceptionMessageById" resultMap="ExceptionMessageMap">
         select
             exception_class,
-            exception_detail
+            exception_detail,
+            last_order_state
         from
             exception_order
         where
             order_id = #{orderId}
+            and solve_state = '未解决'
     </select>
+
+    <update id="updateExceptionSolveState">
+        update
+            exception_order
+        set
+            solve_state = '已解决'
+        where
+            order_id = #{orderId}
+            and solve_state = '未解决'
+    </update>
 
 </mapper>

@@ -23,4 +23,8 @@ public class ExceptionOrderService {
     public Map<String, Object> getExceptionMessageById(int orderId) {
         return exceptionOrderMapper.getExceptionMessageById(orderId);
     }
+
+    public boolean updateExceptionSolveState(int orderId) {
+        return exceptionOrderMapper.updateExceptionSolveState(orderId);
+    }
 }

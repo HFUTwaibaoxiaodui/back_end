@@ -36,4 +36,11 @@ public class ExceptionOrderController {
     public Map<String, Object> getExceptionMessageById(int orderId) {
         return exceptionOrderService.getExceptionMessageById(orderId);
     }
+
+    @PutMapping(value = "/updateExceptionSolveState", produces="application/json; charset=UTF-8")
+    @ApiOperation(value = "更新异常解决状态", notes = "更新异常解决状态")
+    @ResponseBody
+    public boolean updateExceptionSolveState(int orderId) {
+        return exceptionOrderService.updateExceptionSolveState(orderId);
+    }
 }

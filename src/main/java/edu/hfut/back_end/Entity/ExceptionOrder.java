@@ -33,4 +33,9 @@ public class ExceptionOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date submitTime;
+
+    /**
+     * 异常请求之前工单的状态
+     */
+    private String lastOrderState;
 }

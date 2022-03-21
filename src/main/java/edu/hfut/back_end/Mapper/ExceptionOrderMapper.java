@@ -15,4 +15,6 @@ public interface ExceptionOrderMapper {
     boolean submitException(ExceptionOrder exceptionOrder);
 
     Map<String, Object> getExceptionMessageById(int orderId);
+
+    boolean updateExceptionSolveState(int orderId);
 }
