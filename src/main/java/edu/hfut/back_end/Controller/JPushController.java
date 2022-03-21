@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
+
 @RestController
 @CrossOrigin
 @Slf4j
@@ -20,8 +22,8 @@ public class JPushController {
 
     @ApiOperation(value = "send", notes = "send")
     @PostMapping("/sendMessage")
-    public Result sendMessage() {
-        PushResult result = SendUtils.testSendPush();
+    public Result sendMessage(String alias, String name, String message, BigInteger orderId) {
+        PushResult result = SendUtils.SendPush(alias, name, message, orderId);
         return Result.ok("保存成功");
     }
 

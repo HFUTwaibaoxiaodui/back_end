@@ -15,6 +15,9 @@ import cn.jpush.api.push.model.notification.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,6 +148,48 @@ public class SendUtils {
                                 .addExtra("extra_key", "extra_value").build())
                         .build())
                 .build();
+    }
+
+    public static PushPayload buildPushObject_alias_alert(String alias, String name, String message, BigInteger orderId) {
+        Map<String, String> extras = new HashMap<String, String>();
+        extras.put("orderId", orderId.toString());
+        String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        extras.put("time", format);
+        // you can set anything you want in this builder, read the document to avoid collision.
+        return PushPayload.newBuilder()
+                .setPlatform(Platform.android_ios())
+                .setAudience(Audience.alias(alias))
+                .setNotification(Notification.newBuilder()
+                        .setAlert(name)
+                        .addPlatformNotification(AndroidNotification.newBuilder()
+                                .setTitle(message)
+                                .addExtras(extras).build())
+                        .addPlatformNotification(IosNotification.newBuilder()
+                                .incrBadge(1)
+                                .addExtra("extra_key", "extra_value").build())
+                        .build())
+                .build();
+
+    }
+
+    public static PushResult SendPush(String alias, String name, String message, BigInteger orderId) {
+        ClientConfig clientConfig = ClientConfig.getInstance();
+        final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
+        final PushPayload payload = buildPushObject_alias_alert(alias, name, message, orderId);
+        try {
+            PushResult result = jpushClient.sendPush(payload);
+            LOG.info("获得结果" + result);
+            System.out.println(result);
+
+            return result;
+        } catch (APIConnectionException e) {
+            LOG.error("连接错误 ", e);
+            LOG.error("发送号码为: " + payload.getSendno());
+        } catch (APIRequestException e) {
+            LOG.error("极光服务器回复错误 ", e);
+            LOG.error("Sendno: " + payload.getSendno());
+        }
+        return null;
     }
 
 
