@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author herunlin
  */
@@ -25,5 +28,12 @@ public class ExceptionOrderController {
     @ResponseBody
     public boolean pageFindProject(ExceptionOrder exceptionOrder) {
         return exceptionOrderService.submitException(exceptionOrder);
+    }
+
+    @GetMapping(value = "/getExceptionMessageById", produces="application/json; charset=UTF-8")
+    @ApiOperation(value = "根据工单id获取异常信息", notes = "根据工单id获取异常信息")
+    @ResponseBody
+    public Map<String, Object> getExceptionMessageById(int orderId) {
+        return exceptionOrderService.getExceptionMessageById(orderId);
     }
 }

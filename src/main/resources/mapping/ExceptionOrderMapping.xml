@@ -9,4 +9,19 @@
             (#{orderId}, #{exceptionClass}, #{exceptionDetail}, #{submitTime})
     </insert>
 
+    <resultMap id="ExceptionMessageMap" type="java.util.Map">
+        <result column="exception_class" jdbcType="VARCHAR" property="exceptionClass"/>
+        <result column="exception_detail" jdbcType="VARCHAR" property="exceptionDetail"/>
+    </resultMap>
+
+    <select id="getExceptionMessageById" resultMap="ExceptionMessageMap">
+        select
+            exception_class,
+            exception_detail
+        from
+            exception_order
+        where
+            order_id = #{orderId}
+    </select>
+
 </mapper>
