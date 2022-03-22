@@ -137,6 +137,27 @@
             <if test="creatorId != null">
                 and creator_id = #{creatorId}
             </if>
+            <if test="orderName != null">
+                and order_title like concat('%', #{orderName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findOrderCardDetailCount" resultType="int">
+        select
+            count(*)
+        from
+            order_card_detail
+        <where>
+            <if test="orderState != null">
+                and order_state = #{orderState}
+            </if>
+            <if test="workerId != null">
+                and worker_id = #{workerId}
+            </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
+            </if>
         </where>
     </select>
 

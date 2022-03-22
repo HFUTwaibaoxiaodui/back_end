@@ -54,8 +54,17 @@ public class PatrolOrderService {
     public List<Map<String, Object>> findOrderCardDetail(
             String orderState,
             Integer workerId,
-            Integer creatorId
+            Integer creatorId,
+            String orderName
         ) {
-        return patrolOrderMapper.findOrderCardDetail(orderState, workerId, creatorId);
+        return patrolOrderMapper.findOrderCardDetail(orderState, workerId, creatorId, orderName);
+    }
+
+    public int findOrderCardDetailCount(
+            String orderState,
+            Integer workerId,
+            Integer creatorId
+    ) {
+        return patrolOrderMapper.findOrderCardDetailCount(orderState, workerId, creatorId);
     }
 }

@@ -143,8 +143,19 @@ public class PatrolOrderController {
     public List<Map<String, Object>> findOrderCardDetail(
             String orderState,
             Integer workerId,
+            Integer creatorId,
+            String orderName
+    ) {
+        return patrolOrderService.findOrderCardDetail(orderState, workerId, creatorId, orderName);
+    }
+
+    @GetMapping("/findOrderCardDetailCount")
+    @ApiOperation(value = "多条件查询工单卡片并返回数量", notes = "多条件查询工单卡片并返回数量")
+    public int findOrderCardDetailCount(
+            String orderState,
+            Integer workerId,
             Integer creatorId
     ) {
-        return patrolOrderService.findOrderCardDetail(orderState, workerId, creatorId);
+        return patrolOrderService.findOrderCardDetailCount(orderState, workerId, creatorId);
     }
 }
