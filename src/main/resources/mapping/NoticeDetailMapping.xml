@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hfut.back_end.Mapper.NoticeDetailMapper">
+
+    <resultMap id="NoticeDetailResultMap" type="edu.hfut.back_end.Entity.NoticeDetail">
+        <result column="notice_detail" jdbcType="VARCHAR" property="noticeDetail"/>
+        <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="reciver_id" jdbcType="BIGINT" property="receiverId"/>
+        <result column="reciver_name" jdbcType="VARCHAR" property="receiverName"/>
+    </resultMap>
+
+    <select id="findByReceiverId" resultMap="NoticeDetailResultMap">
+        select notice_detail, notice_time, order_id, reciver_id, reciver_name
+        from notice_detail
+        where reciver_id = #{receiverId}
+    </select>
+
+</mapper>
