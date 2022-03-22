@@ -142,8 +142,9 @@ public class PatrolOrderController {
     @ApiOperation(value = "多条件查询工单卡片的信息", notes = "多条件查询工单卡片的信息")
     public List<Map<String, Object>> findOrderCardDetail(
             String orderState,
-            Integer workerId
+            Integer workerId,
+            Integer creatorId
     ) {
-        return patrolOrderService.findOrderCardDetail(orderState, workerId);
+        return patrolOrderService.findOrderCardDetail(orderState, workerId, creatorId);
     }
 }

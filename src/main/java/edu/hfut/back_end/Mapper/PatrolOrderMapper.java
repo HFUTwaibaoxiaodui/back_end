@@ -33,10 +33,12 @@ public interface PatrolOrderMapper {
      * 多条件查询工单卡片的信息
      * @param orderState 工单状态
      * @param workerId 巡检人员Id
+     * @param creatorId 巡检工单创建者Id
      * @return 工单卡片的信息
      */
     List<Map<String, Object>> findOrderCardDetail(
             String orderState,
-            Integer workerId
+            Integer workerId,
+            Integer creatorId
         );
 }

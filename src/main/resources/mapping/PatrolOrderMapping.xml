@@ -134,6 +134,9 @@
             <if test="workerId != null">
                 and worker_id = #{workerId}
             </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
+            </if>
         </where>
     </select>
 
