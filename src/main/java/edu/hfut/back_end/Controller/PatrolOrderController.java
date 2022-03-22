@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @RestController
@@ -138,7 +139,7 @@ public class PatrolOrderController {
     }
 
 
-    @GetMapping("/findOrderCardDetail")
+    @GetMapping(value = "/findOrderCardDetail", produces="application/json; charset=UTF-8")
     @ApiOperation(value = "多条件查询工单卡片的信息", notes = "多条件查询工单卡片的信息")
     public List<Map<String, Object>> findOrderCardDetail(
             String orderState,

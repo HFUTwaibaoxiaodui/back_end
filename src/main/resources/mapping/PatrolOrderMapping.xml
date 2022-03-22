@@ -128,16 +128,16 @@
         from
             order_card_detail
         <where>
-            <if test="orderState != null">
+            <if test="orderState != null and orderState != ''">
                 and order_state = #{orderState}
             </if>
-            <if test="workerId != null">
+            <if test="workerId != null and workerId != ''">
                 and worker_id = #{workerId}
             </if>
-            <if test="creatorId != null">
+            <if test="creatorId != null and creatorId != ''">
                 and creator_id = #{creatorId}
             </if>
-            <if test="orderName != null">
+            <if test="orderName != null  and orderName != ''">
                 and order_title like concat('%', #{orderName}, '%')
             </if>
         </where>
