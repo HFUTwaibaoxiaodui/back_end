@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,4 +57,7 @@ public interface PatrolOrderMapper {
             Integer workerId,
             Integer creatorId
     );
+    int CountCurrentMonthCreatedOrderById(BigInteger accountId,Date startDate, Date endDate);
+    int CountCurrentMonthCreatedAndFinishedOrderById(BigInteger accountId,Date startDate, Date endDate);
+    int CountCurrentMonthExceptionOrderById(Date startDate, Date endDate);
 }

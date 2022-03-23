@@ -1,6 +1,7 @@
 package edu.hfut.back_end.Controller;
 
 import edu.hfut.back_end.Entity.PatrolOrder;
+import edu.hfut.back_end.Entity.PreviousMonthAndCurrentMonthOrderData;
 import edu.hfut.back_end.Service.AccountService;
 import edu.hfut.back_end.Service.OperationLogService;
 import edu.hfut.back_end.Service.PatrolOrderService;
@@ -8,13 +9,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -158,5 +157,55 @@ public class PatrolOrderController {
             Integer creatorId
     ) {
         return patrolOrderService.findOrderCardDetailCount(orderState, workerId, creatorId);
+    }
+
+    @GetMapping("/calculateMonthOrderData")
+    @ApiOperation(value = "查询该管理人员这个月和上个月创建的工单、打分的工单和所有人员的异常工单",
+            notes = "查询该管理人员这个月和上个月创建的工单、打分的工单和所有人员的异常工单")
+    PreviousMonthAndCurrentMonthOrderData calculateMonthOrderData(BigInteger accountId){
+        PreviousMonthAndCurrentMonthOrderData previousMonthAndCurrentMonthOrderData=new PreviousMonthAndCurrentMonthOrderData();
+        Calendar previousMonthFirstDay=initDate();
+        previousMonthFirstDay.add(Calendar.MONTH,-1);
+        Calendar currentMonthFirstDay=initDate();
+        Calendar nextMonthFirstDay=initDate();
+        nextMonthFirstDay.add(Calendar.MONTH,1);
+
+        previousMonthAndCurrentMonthOrderData.setCurrentMonthCreatedOrder(patrolOrderService.CountCurrentMonthCreatedOrderById(accountId,
+                currentMonthFirstDay.getTime(),nextMonthFirstDay.getTime()));
+
+        previousMonthAndCurrentMonthOrderData.setCurrentMonthFinishOrder(
+                patrolOrderService.CountCurrentMonthCreatedAndFinishedOrderById(accountId,
+                        currentMonthFirstDay.getTime(),nextMonthFirstDay.getTime()));
+
+        previousMonthAndCurrentMonthOrderData.setCurrentMonthExceptionOrder(
+                patrolOrderService.CountCurrentMonthExceptionOrderById(currentMonthFirstDay.getTime()
+                        ,nextMonthFirstDay.getTime()));
+
+        previousMonthAndCurrentMonthOrderData.setPreviousMonthCreatedOrder(patrolOrderService.CountCurrentMonthCreatedOrderById(accountId,
+                previousMonthFirstDay.getTime(),currentMonthFirstDay.getTime()));
+
+        previousMonthAndCurrentMonthOrderData.setPreviousMonthFinishOrder(
+                patrolOrderService.CountCurrentMonthCreatedAndFinishedOrderById(accountId,
+                        previousMonthFirstDay.getTime(),currentMonthFirstDay.getTime()));
+
+        previousMonthAndCurrentMonthOrderData.setPreviousMonthExceptionOrder(
+                patrolOrderService.CountCurrentMonthExceptionOrderById(previousMonthFirstDay.getTime()
+                        ,currentMonthFirstDay.getTime()));
+        System.out.println(previousMonthAndCurrentMonthOrderData);
+        return previousMonthAndCurrentMonthOrderData;
+    }
+
+    Calendar initDate(){
+        Calendar currentTime=Calendar.getInstance();
+        //将小时至0
+        currentTime.set(Calendar.HOUR_OF_DAY, 0);
+        //将分钟至0
+        currentTime.set(Calendar.MINUTE, 0);
+        //将秒至0
+        currentTime.set(Calendar.SECOND,0);
+        //将毫秒至0
+        currentTime.set(Calendar.MILLISECOND, 0);
+        currentTime.set(Calendar.DAY_OF_MONTH,1);
+        return currentTime;
     }
 }
