@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PatrolOrderService {
@@ -50,4 +51,20 @@ public class PatrolOrderService {
         patrolOrderMapper.updateOrderState(orderId, orderState);
     }
 
+    public List<Map<String, Object>> findOrderCardDetail(
+            String orderState,
+            Integer workerId,
+            Integer creatorId,
+            String orderName
+        ) {
+        return patrolOrderMapper.findOrderCardDetail(orderState, workerId, creatorId, orderName);
+    }
+
+    public int findOrderCardDetailCount(
+            String orderState,
+            Integer workerId,
+            Integer creatorId
+    ) {
+        return patrolOrderMapper.findOrderCardDetailCount(orderState, workerId, creatorId);
+    }
 }

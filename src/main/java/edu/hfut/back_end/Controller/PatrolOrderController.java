@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -36,9 +38,9 @@ public class PatrolOrderController {
         List<PatrolOrder> patrolOrderList = patrolOrderService.selectAll();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+            patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         }
         log.info("查找全部工单信息：{}", patrolOrderList);
         return patrolOrderList;
@@ -101,9 +103,9 @@ public class PatrolOrderController {
         log.info("通过工单id{}查询", orderId);
         PatrolOrder patrolOrder = patrolOrderService.findByOrderId(orderId);
         patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-        patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-        patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-        patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+        patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+        patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+        patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         return patrolOrder;
     }
 
@@ -122,9 +124,9 @@ public class PatrolOrderController {
         resultList.clear();
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+            patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         }
         Date date = new Date();
         for (PatrolOrder patrolOrder : patrolOrderList) {
@@ -136,4 +138,25 @@ public class PatrolOrderController {
         return resultList;
     }
 
+
+    @GetMapping(value = "/findOrderCardDetail", produces="application/json; charset=UTF-8")
+    @ApiOperation(value = "多条件查询工单卡片的信息", notes = "多条件查询工单卡片的信息")
+    public List<Map<String, Object>> findOrderCardDetail(
+            String orderState,
+            Integer workerId,
+            Integer creatorId,
+            String orderName
+    ) {
+        return patrolOrderService.findOrderCardDetail(orderState, workerId, creatorId, orderName);
+    }
+
+    @GetMapping("/findOrderCardDetailCount")
+    @ApiOperation(value = "多条件查询工单卡片并返回数量", notes = "多条件查询工单卡片并返回数量")
+    public int findOrderCardDetailCount(
+            String orderState,
+            Integer workerId,
+            Integer creatorId
+    ) {
+        return patrolOrderService.findOrderCardDetailCount(orderState, workerId, creatorId);
+    }
 }

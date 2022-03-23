@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface PatrolOrderMapper {
@@ -28,4 +29,31 @@ public interface PatrolOrderMapper {
 
     void updateOrderState(@Param("orderId") BigInteger orderId, @Param("orderState") String orderState);
 
+    /**
+     * 多条件查询工单卡片的信息
+     * @param orderState 工单状态
+     * @param workerId 巡检人员Id
+     * @param creatorId 巡检工单创建者Id
+     * @param orderName 工单名称（模糊）
+     * @return 工单卡片的信息
+     */
+    List<Map<String, Object>> findOrderCardDetail(
+            String orderState,
+            Integer workerId,
+            Integer creatorId,
+            String orderName
+        );
+
+    /**
+     * 多条件查询工单并返回数量
+     * @param orderState 工单状态
+     * @param workerId 巡检人员Id
+     * @param creatorId 巡检工单创建者Id
+     * @return 满足条件的工单卡片的数量
+     */
+    int findOrderCardDetailCount(
+            String orderState,
+            Integer workerId,
+            Integer creatorId
+    );
 }

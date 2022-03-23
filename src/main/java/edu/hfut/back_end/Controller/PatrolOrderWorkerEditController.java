@@ -74,9 +74,9 @@ public class PatrolOrderWorkerEditController {
         }
         for (PatrolOrder patrolOrder : patrolOrderList) {
             patrolOrder.setOperationLogList(operationLogService.findByOrderId(patrolOrder.getOrderId()));
-            patrolOrder.setCreatorName(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getRealName());
-            patrolOrder.setPhone(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getPhone());
-            patrolOrder.setArea(accountService.findContentByAccountId(patrolOrder.getCreatorId()).getArea());
+            patrolOrder.setCreatorName(accountService.selectInformationById(patrolOrder.getCreatorId()).getRealName());
+            patrolOrder.setPhone(accountService.selectInformationById(patrolOrder.getCreatorId()).getPhone());
+            patrolOrder.setArea(accountService.selectInformationById(patrolOrder.getCreatorId()).getArea());
         }
         log.info("查找昨天全部工单信息：{}", patrolOrderList);
         return patrolOrderList;

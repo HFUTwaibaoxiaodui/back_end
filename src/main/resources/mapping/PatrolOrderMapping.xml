@@ -13,7 +13,6 @@
         <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
         <result column="plan_start_time" jdbcType="TIMESTAMP" property="planStartTime"/>
         <result column="plan_end_time" jdbcType="TIMESTAMP" property="planEndTime"/>
-        <result column="score" jdbcType="INTEGER" property="score"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
@@ -29,7 +28,6 @@
                order_address,
                plan_start_time,
                plan_end_time,
-               score,
                gmt_create,
                gmt_modified
         from patrol_order
@@ -38,9 +36,9 @@
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id"
             useGeneratedKeys="true">
         insert into patrol_order(order_id, creator_id, order_title, order_description, order_number, order_state,
-                                 order_address, plan_start_time, plan_end_time, score, gmt_create, gmt_modified)
+                                 order_address, plan_start_time, plan_end_time, gmt_create, gmt_modified)
         values (#{orderId}, #{creatorId}, #{orderTitle}, #{orderDescription}, #{orderNumber}, #{orderState},
-                #{orderAddress}, #{planStartTime}, #{planEndTime}, #{score}, #{gmtCreate}, #{gmtModified})
+                #{orderAddress}, #{planStartTime}, #{planEndTime}, #{gmtCreate}, #{gmtModified})
     </insert>
 
     <update id="update" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
@@ -54,7 +52,6 @@
             order_address     = #{orderAddress},
             plan_start_time   = #{planStartTime},
             plan_end_time     = #{planEndTime},
-            score             = #{score},
             gmt_modified      = #{gmtModified}
         where order_id = #{orderId}
     </update>
@@ -67,7 +64,7 @@
 
     <select id="findByOrderTitle" resultMap="PatrolOrderResultMap">
         select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
-        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        plan_start_time, plan_end_time, gmt_create, gmt_modified
         from patrol_order
         <where>
             order_title like "%"#{orderTitle, jdbcType=VARCHAR}"%"
@@ -76,7 +73,7 @@
 
     <select id="findByOrderNumber" resultMap="PatrolOrderResultMap">
         select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
-        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        plan_start_time, plan_end_time, gmt_create, gmt_modified
         from patrol_order
         <where>
             order_number like "%"#{orderNumber, jdbcType=VARCHAR}"%"
@@ -85,7 +82,7 @@
 
     <select id="findByOrderState" resultMap="PatrolOrderResultMap">
         select order_id, creator_id, order_title, order_description, order_number, order_state, order_address,
-        plan_start_time, plan_end_time, score, gmt_create, gmt_modified
+        plan_start_time, plan_end_time, gmt_create, gmt_modified
         from patrol_order
         <where>
             order_state like "%"#{orderState, jdbcType=VARCHAR}"%"
@@ -102,11 +99,66 @@
                order_address,
                plan_start_time,
                plan_end_time,
-               score,
                gmt_create,
                gmt_modified
         from patrol_order
         where order_id = #{orderId}
+    </select>
+
+
+    <resultMap id="OrderCardDetailMap" type="java.util.HashMap">
+        <result column="order_id" jdbcType="INTEGER"  property="orderId"/>
+        <result column="order_title" jdbcType="VARCHAR"  property="orderTitle"/>
+        <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+        <result column="creator_name" jdbcType="VARCHAR" property="creatorName"/>
+        <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+    </resultMap>
+    
+    <select id="findOrderCardDetail" resultMap="OrderCardDetailMap">
+        select
+            order_id,
+            order_title,
+            order_state,
+            creator_name,
+            order_address,
+            create_time,
+            order_number
+        from
+            order_card_detail
+        <where>
+            <if test="orderState != null and orderState != ''">
+                and order_state = #{orderState}
+            </if>
+            <if test="workerId != null and workerId != ''">
+                and worker_id = #{workerId}
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="orderName != null  and orderName != ''">
+                and order_title like concat('%', #{orderName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findOrderCardDetailCount" resultType="int">
+        select
+            count(*)
+        from
+            order_card_detail
+        <where>
+            <if test="orderState != null">
+                and order_state = #{orderState}
+            </if>
+            <if test="workerId != null">
+                and worker_id = #{workerId}
+            </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
+            </if>
+        </where>
     </select>
 
     <update id="updateOrderState" parameterType="edu.hfut.back_end.Entity.PatrolOrder">

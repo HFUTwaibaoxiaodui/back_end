@@ -20,6 +20,7 @@ public class Account {
     String area;
     Date currentTime;
     String accountState;
+    String firstLetter;
 
     public void setCurrentTime(Date currentTime) {
         this.currentTime = currentTime;
