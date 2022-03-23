@@ -92,7 +92,7 @@ public class AccountController {
         account.setCurrentTime(new Date());
         accountService.updateInformation(account);
     }
-    
+
     @RequestMapping(value = "/selectAllInformation",method = RequestMethod.GET)
     @ApiOperation(value = "查找所有用户的信息")
     List<Account> selectAllInformation(){
