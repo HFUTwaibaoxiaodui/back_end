@@ -52,8 +52,6 @@ public class PatrolOrderController {
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
         patrolOrder.setGmtModified(date);
-/*        patrolOrder.setPlanStartTime(date);
-        patrolOrder.setPlanEndTime(date);*/
         patrolOrderService.insert(patrolOrder);
     }
 
