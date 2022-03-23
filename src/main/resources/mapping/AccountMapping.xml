@@ -64,10 +64,16 @@
     </update>
 
     <update id="updateInformation" parameterType="edu.hfut.back_end.Entity.Account">
-        update account set account_type=#{accountType},imagePath=#{imagePath},real_name=#{realName},phone=#{phone},
-                           address=#{address},area=#{area},gmt_create=#{currentTime},
-                           gmt_modified=#{currentTime} where account_id=#{accountId}
-
+        update account
+        <trim prefix="set" suffixOverrides=",">
+            <if test="imagePath!= null and imagePath!=''">imagePath=#{imagePath},</if>
+            <if test="realName!= null and realName!=''">real_name=#{realName},</if>
+            <if test="phone!= null and phone!=''">phone=#{phone},</if>
+            <if test="address!= null and address!=''">address=#{address},</if>
+            <if test="area!= null and area!=''">area=#{area},</if>
+            <if test="currentTime!= null">gmt_modified=#{currentTime},</if>
+        </trim>
+        where account_id=#{accountId}
     </update>
 
 
