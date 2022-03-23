@@ -28,5 +28,6 @@ public class FTPUtils {
         FTP_CLIENT.storeFile(targetFileName, fileInputStream);
 //        System.out.println("文件上传成功");
         FTP_CLIENT.logout();
+        FTP_CLIENT.disconnect();
     }
 }
