@@ -13,32 +13,20 @@ import java.io.InputStream;
 @Slf4j
 public class FTPUtils {
 
-    private FTPClient ftpClient;
+    private static final FTPClient FTP_CLIENT = new FTPClient();
 
-    private FTPUtils() {
-        ftpClient = new FTPClient();
+    private static void testConnect() throws IOException {
+        FTP_CLIENT.connect("121.40.130.17", 21);
+        FTP_CLIENT.login("ftpuser", "ftp654123");
     }
 
-    private void testConnect() throws IOException {
-        ftpClient.connect("121.40.130.17", 21);
-        ftpClient.login("ftpuser", "ftp654123");
-    }
-
-    private static class FTPUtilsInstance {
-        private static final FTPUtils INSTANCE = new FTPUtils();
-    }
-
-    public static FTPUtils getInstance() {
-        return FTPUtilsInstance.INSTANCE;
-    }
-
-    public void uploadFile(String remoteDir, String targetFileName, InputStream fileInputStream) throws IOException {
-        log.info("开始上传文件");
+    public static void uploadFile(String remoteDir, String targetFileName, InputStream fileInputStream) throws IOException {
+//        System.out.println("开始上传文件");
         testConnect();
-        ftpClient.changeWorkingDirectory(remoteDir);
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-        ftpClient.storeFile(targetFileName, fileInputStream);
-        log.info("文件上传成功");
-        ftpClient.logout();
+        FTP_CLIENT.changeWorkingDirectory(remoteDir);
+        FTP_CLIENT.setFileType(FTP.BINARY_FILE_TYPE);
+        FTP_CLIENT.storeFile(targetFileName, fileInputStream);
+//        System.out.println("文件上传成功");
+        FTP_CLIENT.logout();
     }
 }

@@ -58,18 +58,16 @@ public class ImageController {
             String uuid = UUID.randomUUID().toString().replace('-', '0');
 
             String originalFileName = multipartFile.getOriginalFilename();
-            assert originalFileName != null;
-            String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));
-            String targetFileName = uuid + fileSuffix;
 
-            FTPUtils.getInstance().uploadFile(remoteFileDir, targetFileName, fileInputStream);
-
-            return targetFileName;
+            if (originalFileName != null) {
+                String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));
+                String targetFileName = uuid + fileSuffix;
+                FTPUtils.uploadFile(remoteFileDir, targetFileName, fileInputStream);
+                return targetFileName;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return "null";
     }
-
 }
