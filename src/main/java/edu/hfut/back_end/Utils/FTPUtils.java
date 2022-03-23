@@ -16,7 +16,7 @@ public class FTPUtils {
     private static final FTPClient FTP_CLIENT = new FTPClient();
 
     private static void testConnect() throws IOException {
-        FTP_CLIENT.connect("121.40.130.17", 21);
+        FTP_CLIENT.connect("172.16.150.250", 21);
         FTP_CLIENT.login("ftpuser", "ftp654123");
     }
 
