@@ -32,23 +32,13 @@ public class FTPUtils {
         return FTPUtilsInstance.INSTANCE;
     }
 
-    public void uploadFile(String remoteDir, String targetFileName, InputStream fileInputStream) {
-        try {
-            log.info("开始上传文件");
-            testConnect();
-            ftpClient.changeWorkingDirectory(remoteDir);
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            ftpClient.storeFile(targetFileName, fileInputStream);
-            log.info("文件上传成功");
-        } catch (IOException e) {
-            log.error("文件上传失败");
-            e.printStackTrace();
-        } finally {
-            try {
-                ftpClient.logout();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public void uploadFile(String remoteDir, String targetFileName, InputStream fileInputStream) throws IOException {
+        log.info("开始上传文件");
+        testConnect();
+        ftpClient.changeWorkingDirectory(remoteDir);
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        ftpClient.storeFile(targetFileName, fileInputStream);
+        log.info("文件上传成功");
+        ftpClient.logout();
     }
 }
