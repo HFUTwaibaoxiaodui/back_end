@@ -24,13 +24,9 @@ public class AccountService {
         }
     }
 
-    public void updateLoginTime(String accountName){
-        accountMapper.updateLoginTime(new Date(),accountName);
-    }
+    public void updateLoginTime(String accountName){accountMapper.updateLoginTime(new Date(),accountName);}
 
-    public void signIn(Account account){
-        accountMapper.signIn(account);
-    }
+    public void signIn(Account account){accountMapper.signIn(account);}
 
     public List<Account> selectOneInformation(String accountName){return accountMapper.selectOneInformation(accountName);}
 
