@@ -63,8 +63,8 @@ public class PatrolOrderController {
         log.info("更新{}", patrolOrder);
         Date date = new Date();
         patrolOrder.setGmtModified(date);
-        patrolOrder.setPlanStartTime(date);
-        patrolOrder.setPlanEndTime(date);
+/*        patrolOrder.setPlanStartTime(date);
+        patrolOrder.setPlanEndTime(date);*/
         patrolOrderService.update(patrolOrder);
     }
 
