@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hfut.back_end.Mapper.NoticeMapper">
+
+    <resultMap id="NoticeResultMap" type="edu.hfut.back_end.Entity.Notice">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime"/>
+        <result column="notice_detail" jdbcType="VARCHAR" property="noticeDetail"/>
+        <result column="reciver_id" jdbcType="BIGINT" property="receiverId"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="edu.hfut.back_end.Entity.Notice" keyColumn="id"
+            useGeneratedKeys="true">
+        insert into notice(id, notice_time, notice_detail, reciver_id, order_id)
+        values (#{id}, #{noticeTime}, #{noticeDetail}, #{receiverId}, #{orderId})
+    </insert>
+
+</mapper>

@@ -179,8 +179,6 @@ public class SendUtils {
         try {
             PushResult result = jpushClient.sendPush(payload);
             LOG.info("获得结果" + result);
-            System.out.println(result);
-
             return result;
         } catch (APIConnectionException e) {
             LOG.error("连接错误 ", e);
