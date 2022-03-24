@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('pull code') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[credentialsId: '44c5565b-eb81-42b7-8cbf-06c687cf001f', url: 'https://github.com/HFUTwaibaoxiaodui/back_end.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[credentialsId: '44c5565b-eb81-42b7-8cbf-06c687cf001f', url: 'https://github.com/HFUTwaibaoxiaodui/back_end']]])
             }
         }
         stage('build project') {
