@@ -5,11 +5,11 @@ import edu.hfut.back_end.Entity.PreviousMonthAndCurrentMonthOrderData;
 import edu.hfut.back_end.Service.AccountService;
 import edu.hfut.back_end.Service.OperationLogService;
 import edu.hfut.back_end.Service.PatrolOrderService;
+import edu.hfut.back_end.Utils.GenerateOrderCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -212,5 +212,11 @@ public class PatrolOrderController {
         currentTime.set(Calendar.MILLISECOND, 0);
         currentTime.set(Calendar.DAY_OF_MONTH,1);
         return currentTime;
+    }
+
+    @GetMapping("/gerOrderCode")
+    @ApiOperation(value = "生成工单编号", notes = "生成工单编号")
+    public static String gerOrderCode() {
+        return GenerateOrderCode.gerOrderCode();
     }
 }
