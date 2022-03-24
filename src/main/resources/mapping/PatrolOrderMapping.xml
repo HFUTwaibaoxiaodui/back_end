@@ -137,11 +137,35 @@
         from
         order_card_detail
         <where>
+            <if test="orderState != null and orderState != ''">
+                and order_state = #{orderState}
+            </if>
+            <if test="workerId != null and workerId != ''">
+                and worker_id = #{workerId}
+            </if>
+            <if test="creatorId != null and creatorId != ''">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="orderName != null  and orderName != ''">
+                and order_title like concat('%', #{orderName}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findOrderCardDetailCount" resultType="int">
+        select
+            count(*)
+        from
+            order_card_detail
+        <where>
             <if test="orderState != null">
                 and order_state = #{orderState}
             </if>
             <if test="workerId != null">
                 and worker_id = #{workerId}
+            </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
             </if>
         </where>
     </select>
@@ -152,4 +176,18 @@
         where order_id = #{orderId}
     </update>
 
+    <select id="CountCurrentMonthCreatedOrderById" resultType="java.lang.Integer">
+        select count(creator_id) from patrol_order where creator_id=#{accountId} and gmt_create &gt;=#{startDate}
+        and gmt_create &lt;#{endDate}
+    </select>
+
+    <select id="CountCurrentMonthCreatedAndFinishedOrderById" resultType="java.lang.Integer">
+        select count(creator_id) from patrol_order where creator_id=#{accountId} and gmt_create &gt;=#{startDate}
+        and gmt_create &lt;#{endDate} and order_state='已完成'
+    </select>
+
+    <select id="CountCurrentMonthExceptionOrderById" resultType="java.lang.Integer">
+        select count(creator_id) from patrol_order where gmt_create &gt;=#{startDate}
+        and gmt_create &lt;#{endDate} and order_state='异常'
+    </select>
 </mapper>

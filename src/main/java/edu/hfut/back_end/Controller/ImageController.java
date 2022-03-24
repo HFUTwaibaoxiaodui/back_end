@@ -1,7 +1,9 @@
 package edu.hfut.back_end.Controller;
 
+import edu.hfut.back_end.Utils.FTPUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +24,8 @@ public class ImageController {
     @Value("${user.filepath}")
     private String filePath;
 
+    @Value("${remote.image-dir}")
+    private String remoteFileDir;
 
     // 处理上传图片请求的方法
     // @RequestPart("pic")MultipartFile 上传文件时携带图片的key定义为pic
@@ -45,4 +50,24 @@ public class ImageController {
         return "http://localhost:9090/api/images/" + uuid + fileSuffix;
     }
 
+    @PostMapping(value = "/uploadImage", consumes = "multipart/form-data")
+    public String uploadImage(@RequestPart("pic") MultipartFile multipartFile) {
+        try {
+            InputStream fileInputStream = multipartFile.getInputStream();
+
+            String uuid = UUID.randomUUID().toString().replace('-', '0');
+
+            String originalFileName = multipartFile.getOriginalFilename();
+
+            if (originalFileName != null) {
+                String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));
+                String targetFileName = uuid + fileSuffix;
+                FTPUtils.uploadFile(remoteFileDir, targetFileName, fileInputStream);
+                return targetFileName;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "null";
+    }
 }
