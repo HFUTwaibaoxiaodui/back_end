@@ -60,4 +60,5 @@ public interface PatrolOrderMapper {
     int CountCurrentMonthCreatedOrderById(BigInteger accountId,Date startDate, Date endDate);
     int CountCurrentMonthCreatedAndFinishedOrderById(BigInteger accountId,Date startDate, Date endDate);
     int CountCurrentMonthExceptionOrderById(Date startDate, Date endDate);
+    void updateWorkerIdByOrderId(BigInteger orderId,BigInteger newWorkerId);
 }

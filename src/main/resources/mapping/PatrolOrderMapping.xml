@@ -167,6 +167,12 @@
         where order_id = #{orderId}
     </update>
 
+    <update id="updateWorkerIdByOrderId" parameterType="java.math.BigInteger">
+        update patrol_order
+        set worker_id = #{newWorkerId}
+        where order_id = #{orderId}
+    </update>
+
     <select id="CountCurrentMonthCreatedOrderById" resultType="java.lang.Integer">
         select count(creator_id) from patrol_order where creator_id=#{accountId} and gmt_create &gt;=#{startDate}
         and gmt_create &lt;#{endDate}
