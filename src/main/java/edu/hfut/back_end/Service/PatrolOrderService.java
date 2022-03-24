@@ -78,4 +78,8 @@ public class PatrolOrderService {
     public int CountCurrentMonthExceptionOrderById(Date startDate,Date endDate){
         return patrolOrderMapper.CountCurrentMonthExceptionOrderById(startDate,endDate);
     }
+
+    public void updateWorkerIdByOrderId(BigInteger orderId,BigInteger newWorkerId){
+        patrolOrderMapper.updateWorkerIdByOrderId(orderId,newWorkerId);
+    }
 }

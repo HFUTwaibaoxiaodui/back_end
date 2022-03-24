@@ -52,8 +52,6 @@ public class PatrolOrderController {
         Date date = new Date();
         patrolOrder.setGmtCreate(date);
         patrolOrder.setGmtModified(date);
-/*        patrolOrder.setPlanStartTime(date);
-        patrolOrder.setPlanEndTime(date);*/
         patrolOrderService.insert(patrolOrder);
     }
 
@@ -114,6 +112,13 @@ public class PatrolOrderController {
         log.info("更新工单{}状态为{}", orderId, orderState);
         patrolOrderService.updateOrderState(orderId, orderState);
     }
+
+    @RequestMapping(value = "/giveOthers", method = RequestMethod.PUT)
+    @ApiOperation(value = "将工单转派给其他人员", notes = "将工单转派给其他人员")
+    public void giveOrderToOther(BigInteger orderId,BigInteger newWorkerId){
+        patrolOrderService.updateWorkerIdByOrderId(orderId,newWorkerId);
+    }
+
 
     @RequestMapping(value = "/selectAllNow", method = RequestMethod.GET)
     @ApiOperation(value = "查找现在全部工单信息", notes = "查找现在全部工单信息")
