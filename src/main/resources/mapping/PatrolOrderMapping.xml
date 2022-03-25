@@ -14,6 +14,7 @@
         <result column="order_address" jdbcType="VARCHAR" property="orderAddress"/>
         <result column="plan_start_time" jdbcType="TIMESTAMP" property="planStartTime"/>
         <result column="plan_end_time" jdbcType="TIMESTAMP" property="planEndTime"/>
+        <result column="worker_name" jdbcType="VARCHAR" property="workerName"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
@@ -32,6 +33,7 @@
                gmt_create,
                gmt_modified
         from patrol_order
+        order by gmt_create desc
     </select>
 
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id"
@@ -84,6 +86,12 @@
         where order_id = #{orderId}
     </update>
 
+    <update id="updateWorker" parameterType="java.lang.Integer">
+        update patrol_order
+        set worker_id = #{workerId}
+        where order_id = #{orderId}
+    </update>
+
     <delete id="delete" parameterType="BigInteger">
         delete
         from patrol_order
@@ -132,7 +140,8 @@
                plan_start_time,
                plan_end_time,
                gmt_create,
-               gmt_modified
+               gmt_modified,
+               (select real_name from account where account_id = worker_id) as worker_name
         from patrol_order
         where order_id = #{orderId}
     </select>
@@ -173,6 +182,7 @@
                 and order_title like concat('%', #{orderName}, '%')
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="findOrderCardDetailCount" resultType="int">

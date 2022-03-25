@@ -20,6 +20,7 @@
         select id, order_id, operation_name, description, operation_time
         from operation_log
         where order_id = #{orderId}
+        order by operation_time desc
     </select>
 
 </mapper>

@@ -18,6 +18,8 @@ public interface PatrolOrderMapper {
 
     void update(PatrolOrder patrolOrder);
 
+    void updateWorker(Integer workerId, Integer orderId);
+
     void delete(@Param("orderId") BigInteger orderId);
 
     List<PatrolOrder> findByOrderTitle(@Param("orderTitle") String orderTitle);

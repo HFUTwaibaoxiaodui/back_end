@@ -2,6 +2,7 @@ package edu.hfut.back_end.Service;
 
 import edu.hfut.back_end.Entity.PatrolOrder;
 import edu.hfut.back_end.Mapper.PatrolOrderMapper;
+import edu.hfut.back_end.Utils.GenerateOrderCode;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,11 +22,16 @@ public class PatrolOrderService {
     }
 
     public void insert(PatrolOrder patrolOrder) {
+        patrolOrder.setOrderNumber(GenerateOrderCode.gerOrderCode());
         patrolOrderMapper.insert(patrolOrder);
     }
 
     public void update(PatrolOrder patrolOrder) {
         patrolOrderMapper.update(patrolOrder);
+    }
+
+    public void updateWorker(Integer workerId, Integer orderId) {
+        patrolOrderMapper.updateWorker(workerId, orderId);
     }
 
     public void delete(BigInteger orderId) {

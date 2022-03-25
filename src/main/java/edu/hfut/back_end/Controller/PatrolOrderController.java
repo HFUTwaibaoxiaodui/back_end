@@ -113,6 +113,13 @@ public class PatrolOrderController {
         patrolOrderService.updateOrderState(orderId, orderState);
     }
 
+
+    @PutMapping(value = "/updateWorker")
+    @ApiOperation(value = "更新巡检人员", notes = "更新巡检人员")
+    public void updateWorker(Integer workerId, Integer orderId) {
+        patrolOrderService.updateWorker(workerId, orderId);
+    }
+
     @RequestMapping(value = "/giveOthers", method = RequestMethod.PUT)
     @ApiOperation(value = "将工单转派给其他人员", notes = "将工单转派给其他人员")
     public void giveOrderToOther(BigInteger orderId,BigInteger newWorkerId){
