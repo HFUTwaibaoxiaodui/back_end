@@ -21,12 +21,10 @@ public class FTPUtils {
     }
 
     public static void uploadFile(String remoteDir, String targetFileName, InputStream fileInputStream) throws IOException {
-//        System.out.println("开始上传文件");
         testConnect();
         FTP_CLIENT.changeWorkingDirectory(remoteDir);
         FTP_CLIENT.setFileType(FTP.BINARY_FILE_TYPE);
         FTP_CLIENT.storeFile(targetFileName, fileInputStream);
-//        System.out.println("文件上传成功");
         FTP_CLIENT.logout();
         FTP_CLIENT.disconnect();
     }
