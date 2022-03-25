@@ -41,6 +41,9 @@ public class PatrolOrder {
 
     String area;
 
+    Double latitude;//经度
+    Double longitude;//纬度
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     Date gmtCreate;
@@ -50,5 +53,8 @@ public class PatrolOrder {
     Date gmtModified;
 
     List<OperationLog> operationLogList;
+
+    Double distance;
+
 
 }

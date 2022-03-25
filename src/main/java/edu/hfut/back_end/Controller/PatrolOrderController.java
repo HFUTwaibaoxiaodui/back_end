@@ -219,4 +219,48 @@ public class PatrolOrderController {
     public static String gerOrderCode() {
         return GenerateOrderCode.gerOrderCode();
     }
+
+    @GetMapping("/sortOrder")
+    @ApiOperation(value = "返回排序后的工单", notes = "返回排序后的工单")
+    List<PatrolOrder> selectAllOrderByDistance(Double currentLongitude
+            ,Double currentLatitude){//longitude经度，latitude纬度
+        List<PatrolOrder> patrolOrderSortedList=patrolOrderService.selectAllWaitingOrder();
+        for(PatrolOrder eachPatrolOrder:patrolOrderSortedList){
+            if(eachPatrolOrder.getLatitude()!=null&&eachPatrolOrder.getLongitude()!=null){
+                eachPatrolOrder.setDistance(calculateDistance(currentLongitude,currentLatitude,
+                        eachPatrolOrder.getLongitude(),eachPatrolOrder.getLatitude()));
+            }
+            else{
+                eachPatrolOrder.setDistance(1000000000.0);
+            }
+        }
+        for(int i=0;i<patrolOrderSortedList.size();i++){
+            int min=i;
+            for(int j=i+1;j<patrolOrderSortedList.size();j++){
+                if(patrolOrderSortedList.get(min).getDistance()>patrolOrderSortedList.get(j).getDistance()){
+                    min=j;
+                }
+            }
+            Collections.swap(patrolOrderSortedList, i, min);
+        }
+
+        return patrolOrderSortedList;
+    }
+
+    public double calculateDistance(Double currentLongitude, Double currentLatitude,Double orderLongitude,Double orderLatitude){
+        double lon1 = (Math.PI / 180) * currentLongitude;
+        double lon2 = (Math.PI / 180) * orderLongitude;
+        double lat1 = (Math.PI / 180) * currentLatitude;
+        double lat2 = (Math.PI / 180) * orderLatitude;
+        double lonSub=lon2-lon1;
+        double latSub=lat2-lat1;
+        // 地球半径
+        double R = 6371;
+        // 两点间距离 km，如果想要米的话，结果*1000就可以了
+        double d = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(latSub/2),2) +
+                Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin(lonSub/2),2)))
+                * R;
+
+        return d * 1000;
+    }
 }
