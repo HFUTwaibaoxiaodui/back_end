@@ -5,6 +5,7 @@ import edu.hfut.back_end.Mapper.PatrolOrderWorkerEditMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -19,6 +20,10 @@ public class PatrolOrderWorkerEditService {
 
     public void insert(PatrolOrderWorkerEdit patrolOrderWorkerEdit) {
         patrolOrderWorkerEditMapper.insert(patrolOrderWorkerEdit);
+    }
+
+    public List<PatrolOrderWorkerEdit> findByOrderId(BigInteger orderId) {
+        return patrolOrderWorkerEditMapper.findByOrderId(orderId);
     }
 
 }

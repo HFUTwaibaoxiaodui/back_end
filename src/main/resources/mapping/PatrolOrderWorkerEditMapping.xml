@@ -44,4 +44,21 @@
                 #{photo1}, #{photo2}, #{beginTime}, #{endTime}, #{gmtCreate}, #{gmtModified})
     </insert>
 
+    <select id="findByOrderId" resultMap="PatrolOrderWorkerEditResultMap">
+        select id,
+               order_id,
+               site_name,
+               inspection_category,
+               inspection_content,
+               inspection_result,
+               photo1,
+               photo2,
+               begin_time,
+               end_time,
+               gmt_create,
+               gmt_modified
+        from patrol_order_worker_edit
+        where order_id = #{orderId}
+    </select>
+
 </mapper>
