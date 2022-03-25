@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -92,6 +93,13 @@ public class PatrolOrderWorkerEditController {
 /*        patrolOrderWorkerEdit.setBeginTime(date);
         patrolOrderWorkerEdit.setEndTime(date);*/
         patrolOrderWorkerEditService.insert(patrolOrderWorkerEdit);
+    }
+
+    @RequestMapping(value = "/findByOrderId", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单id查询信息", notes = "通过工单id查询信息")
+    public List<PatrolOrderWorkerEdit> findByOrderId(BigInteger orderId) {
+        log.info("通过工单id{}查询", orderId);
+        return patrolOrderWorkerEditService.findByOrderId(orderId);
     }
 
 }
