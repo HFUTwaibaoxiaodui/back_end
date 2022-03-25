@@ -15,9 +15,17 @@
         <result column="plan_start_time" jdbcType="TIMESTAMP" property="planStartTime"/>
         <result column="plan_end_time" jdbcType="TIMESTAMP" property="planEndTime"/>
         <result column="worker_name" jdbcType="VARCHAR" property="workerName"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
+        <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
+
+    <select id="selectAllWaitingOrder" resultMap="PatrolOrderResultMap">
+        select order_id,creator_id,worker_id,order_title,order_description,order_number,order_state,order_address,
+               plan_start_time,plan_end_time,latitude,longitude,gmt_create,gmt_modified
+        from patrol_order where order_state='待抢单'
+    </select>
 
     <select id="selectAll" resultMap="PatrolOrderResultMap" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
         select order_id,
@@ -229,4 +237,5 @@
         select count(creator_id) from patrol_order where gmt_create &gt;=#{startDate}
         and gmt_create &lt;#{endDate} and order_state='异常'
     </select>
+
 </mapper>

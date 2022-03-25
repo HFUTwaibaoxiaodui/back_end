@@ -88,4 +88,8 @@ public class PatrolOrderService {
     public void updateWorkerIdByOrderId(BigInteger orderId,BigInteger newWorkerId){
         patrolOrderMapper.updateWorkerIdByOrderId(orderId,newWorkerId);
     }
+
+    public List<PatrolOrder> selectAllWaitingOrder(){
+        return patrolOrderMapper.selectAllWaitingOrder();
+    }
 }
