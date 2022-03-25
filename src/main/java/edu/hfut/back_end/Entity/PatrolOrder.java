@@ -29,6 +29,16 @@ public class PatrolOrder {
 
     String orderAddress;
 
+    /**
+     * 巡检地址经度
+     */
+    Double latitude;
+
+    /**
+     * 巡检地址纬度
+     */
+    Double longitude;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     Date planStartTime;

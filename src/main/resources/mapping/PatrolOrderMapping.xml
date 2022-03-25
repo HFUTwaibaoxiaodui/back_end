@@ -18,7 +18,6 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
 
-
     <select id="selectAll" resultMap="PatrolOrderResultMap" parameterType="edu.hfut.back_end.Entity.PatrolOrder">
         select order_id,
                creator_id,
@@ -37,12 +36,36 @@
 
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.PatrolOrder" keyColumn="order_id"
             useGeneratedKeys="true">
-        insert into patrol_order(order_id, creator_id, worker_id, order_title, order_description, order_number,
-                                 order_state,
-                                 order_address, plan_start_time, plan_end_time, gmt_create, gmt_modified)
-        values (#{orderId}, #{creatorId}, #{workerId}, #{orderTitle}, #{orderDescription}, #{orderNumber},
+        insert into
+            patrol_order(
+                 order_id,
+                 creator_id,
+                 worker_id,
+                 order_title,
+                 order_description,
+                 order_number,
+                 order_state,
+                 order_address,
+                 latitude,
+                 longitude,
+                 plan_start_time,
+                 plan_end_time,
+                 gmt_create,
+                 gmt_modified)
+        values (#{orderId},
+                #{creatorId},
+                #{workerId},
+                #{orderTitle},
+                #{orderDescription},
+                #{orderNumber},
                 #{orderState},
-                #{orderAddress}, #{planStartTime}, #{planEndTime}, #{gmtCreate}, #{gmtModified})
+                #{orderAddress},
+                #{latitude},
+                #{longitude},
+                #{planStartTime},
+                #{planEndTime},
+                #{gmtCreate},
+                #{gmtModified})
     </insert>
 
     <update id="update" parameterType="edu.hfut.back_end.Entity.PatrolOrder">

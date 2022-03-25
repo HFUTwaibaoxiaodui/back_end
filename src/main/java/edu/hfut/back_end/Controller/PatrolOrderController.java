@@ -151,6 +151,10 @@ public class PatrolOrderController {
             Integer creatorId,
             String orderName
     ) {
+        System.out.println(orderState);
+        System.out.println(workerId);
+        System.out.println(creatorId);
+        System.out.println(orderName);
         return patrolOrderService.findOrderCardDetail(orderState, workerId, creatorId, orderName);
     }
 
