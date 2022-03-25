@@ -8,12 +8,13 @@
         <result column="notice_detail" jdbcType="VARCHAR" property="noticeDetail"/>
         <result column="reciver_id" jdbcType="BIGINT" property="receiverId"/>
         <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="sender_name" jdbcType="VARCHAR" property="senderName"/>
     </resultMap>
 
     <insert id="insert" parameterType="edu.hfut.back_end.Entity.Notice" keyColumn="id"
             useGeneratedKeys="true">
-        insert into notice(id, notice_time, notice_detail, reciver_id, order_id)
-        values (#{id}, #{noticeTime}, #{noticeDetail}, #{receiverId}, #{orderId})
+        insert into notice(id, notice_time, notice_detail, reciver_id, order_id, sender_name)
+        values (#{id}, #{noticeTime}, #{noticeDetail}, #{receiverId}, #{orderId}, #{senderName})
     </insert>
 
 </mapper>

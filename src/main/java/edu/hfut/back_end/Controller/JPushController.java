@@ -36,6 +36,8 @@ public class JPushController {
         notice.setNoticeDetail(message);
         notice.setReceiverId(new BigInteger(alias));
         notice.setOrderId(orderId);
+        notice.setSenderName(name);
+        System.out.println(notice);
         noticeService.insert(notice);
         return Result.ok("保存成功");
     }

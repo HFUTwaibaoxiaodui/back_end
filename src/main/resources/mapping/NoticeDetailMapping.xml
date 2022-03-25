@@ -7,11 +7,11 @@
         <result column="notice_time" jdbcType="TIMESTAMP" property="noticeTime"/>
         <result column="order_id" jdbcType="BIGINT" property="orderId"/>
         <result column="reciver_id" jdbcType="BIGINT" property="receiverId"/>
-        <result column="reciver_name" jdbcType="VARCHAR" property="receiverName"/>
+        <result column="sender_name" jdbcType="VARCHAR" property="senderName"/>
     </resultMap>
 
     <select id="findByReceiverId" resultMap="NoticeDetailResultMap">
-        select notice_detail, notice_time, order_id, reciver_id, reciver_name
+        select notice_detail, notice_time, order_id, reciver_id, sender_name
         from notice_detail
         where reciver_id = #{receiverId}
     </select>

@@ -22,4 +22,5 @@ public class Notice {
 
     BigInteger orderId;
 
+    String senderName;
 }

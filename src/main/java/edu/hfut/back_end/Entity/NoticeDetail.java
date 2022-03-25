@@ -20,6 +20,5 @@ public class NoticeDetail {
 
     BigInteger receiverId;
 
-    String receiverName;
-
+    String senderName;
 }
