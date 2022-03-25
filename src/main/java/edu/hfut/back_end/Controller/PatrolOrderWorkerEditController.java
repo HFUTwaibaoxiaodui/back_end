@@ -95,11 +95,18 @@ public class PatrolOrderWorkerEditController {
         patrolOrderWorkerEditService.insert(patrolOrderWorkerEdit);
     }
 
-    @RequestMapping(value = "/findByOrderId", method = RequestMethod.GET)
-    @ApiOperation(value = "通过工单id查询信息", notes = "通过工单id查询信息")
-    public List<PatrolOrderWorkerEdit> findByOrderId(BigInteger orderId) {
-        log.info("通过工单id{}查询", orderId);
+    @RequestMapping(value = "/findByOrderIdList", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单id查询工单编辑信息列表", notes = "通过工单id查询工单编辑信息列表")
+    public List<PatrolOrderWorkerEdit> findByOrderIdList(BigInteger orderId) {
+        log.info("通过工单id{}查询信息列表", orderId);
         return patrolOrderWorkerEditService.findByOrderId(orderId);
+    }
+
+    @RequestMapping(value = "/findByOrderId", method = RequestMethod.GET)
+    @ApiOperation(value = "通过工单id查询工单编辑信息", notes = "通过工单id查询工单编辑信息")
+    public PatrolOrderWorkerEdit findByOrderId(BigInteger orderId) {
+        log.info("通过工单id{}查询工单编辑信息", orderId);
+        return patrolOrderWorkerEditService.findByOrderId(orderId).get(0);
     }
 
 }
